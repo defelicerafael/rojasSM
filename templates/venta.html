@@ -14,13 +14,13 @@ table tr:nth-child(even) {
    <header></header>
     <md-content layout="column" layout-padding>
         <div layout="column" layout-align="center center">
-            <md-button style="width:20%; background-color: black; color:white;" ng-click="dtl.Select('no','locales','fecha_de_venta', 'ASC', '999');dtl.Select('no','medios_de_pago','nombre', 'ASC','999');dtl.Select('no','pago','nombre', 'ASC','999');dtl.Select('no','enviado','nombre', 'ASC','999');dtl.Select('no','canales','nombre', 'ASC','999');dtl.Select('no','facturadora','nombre', 'ASC','999');">CARGAR VENTAS</md-button>
+            <md-button style="width:20%; background-color: black; color:white;" ng-click="dtl.Select('no','locales','id', 'ASC', '999');dtl.Select('no','medios_de_pago','nombre', 'ASC','999');dtl.Select('no','pago','nombre', 'ASC','999');dtl.Select('no','enviado','nombre', 'ASC','999');dtl.Select('no','canales','nombre', 'ASC','999');dtl.Select('no','facturadora','nombre', 'ASC','999');">CARGAR VENTAS</md-button>
             <p ng-show="isLoading">CARGANDO VENTAS...</p>
         </div>
         <section>
         <!--<md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>-->
             <md-tabs md-dynamic-height md-border-bottom >
-                <md-tab label="{{d.nombre}}" ng-repeat="d in dtl.locales | orderBy:'ubicacion'" ng-click="dtl.Select({'local':d.nombre,'pago':dtl.filtro},'zapato','id','ASC','9999');">
+                <md-tab label="{{d.nombre}}" ng-repeat="d in dtl.locales | orderBy:'ubicacion'" ng-click="dtl.Select({'local':d.nombre,'pago':dtl.filtro},'zapato','fecha_de_venta','DESC','9999');">
                     <div style="border-top-right-radius: 25px; border-top-left-radius: 25px;background-color: black; color:white; height:40px; padding: 10px;" layout="row" layout-align="space around">
                         <div>
                             ({{dtl.zapatosL}})
@@ -50,6 +50,9 @@ table tr:nth-child(even) {
                                 <option ng-value="m.numero" ng-repeat="m in dtl.talles  track by $index" >{{m.numero}}</option>
                             </select>
                         </div>
+                        <div>
+                            <md-button ng-click="id=dtl.filtro=modelos=colores=talles=''" style="margin-top:-2%;">RESET</md-button>
+                        </div>
                         
                         <div>
                             <img src="img/icon/baseline-archive-24px.png" alt="bajar a excel" style="width: 30px; height: auto; cursor: pointer;"  ng-click="dtl.Excel({'local':d.nombre,'pago':dtl.filtro},'zapato','id','ASC','9999');"/>
@@ -78,7 +81,7 @@ table tr:nth-child(even) {
                                 <th>Grabar</th>
                                
                             </tr>
-                            <tr ng-repeat="z in dtl.zapatos | orderBy:d.fecha_de_venta | filter :{'local':d.nombre,'pago':dtl.filtro,'modelo':modelos,'talle':talles,'color':colores,'id':id} track by $index" ng-show="!isLoading">
+                            <tr ng-repeat="z in dtl.zapatos | orderBy:d.nombre | filter :{'local':d.nombre,'pago':dtl.filtro,'modelo':modelos,'talle':talles,'color':colores,'id':id} track by $index" ng-show="!isLoading">
                                 <td>{{z.id}}</td>
                                 <td>{{z.modelo}}</td>
                                 <td>{{z.color}}</td>

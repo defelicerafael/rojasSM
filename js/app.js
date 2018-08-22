@@ -154,6 +154,59 @@
         
         dtl.Edit = function (datosi,tablai,idi,show){
             //console.log(datosi,tabla,id,show);
+           // var datosIgresados = angular.fromJson(datosi);
+           // console.log(datosIgresados[0]);
+            $scope.isLoading=true;
+            var where = 'id';
+            var datos = datosi;
+            var link = 'server/edit.php';
+            var tabla = tablai;
+            var id = idi;
+            var show = show;
+            SqlEdit.async(link,datos,tabla,id,where).then(function(d){
+            console.log(d);
+            
+           // dtl.showSimpleToast("Ha editado con EXITO");
+            $scope.isLoading = false;
+            
+                if(show===1){
+                    window.history.back(1);
+                }
+                if(show==='5'){
+                   console.log('Entre',datos,id);
+                    $http({method: 'POST', url: 'server/email.php', data: {datos:datos,id:id}}).
+                      then(function(response) {
+                        $scope.status = response.status;
+                        $scope.data = response.data;
+                        console.log($scope.data);
+                      }, function(response) {
+                        $scope.data = response.data || 'Request failed';
+                      console.log($scope.data);  
+                      $scope.status = response.status;
+                    });
+                  
+                    
+                }
+                if(show==='6'){
+                   console.log('Entre',datos,id);
+                    $http({method: 'POST', url: 'server/emailLocal.php', data: {id:id}}).
+                      then(function(response) {
+                        $scope.status = response.status;
+                        $scope.data = response.data;
+                        console.log($scope.data);
+                      }, function(response) {
+                        $scope.data = response.data || 'Request failed';
+                      console.log($scope.data);  
+                      $scope.status = response.status;
+                    });
+                  
+                    
+                }
+            });
+        };
+        
+        dtl.EditObj = function (datosi,tablai,idi,show){
+            //console.log(datosi,tabla,id,show);
             var datosIgresados = angular.fromJson(datosi);
            // console.log(datosIgresados[0]);
             $scope.isLoading=true;
@@ -165,7 +218,8 @@
             var show = show;
             SqlEdit.async(link,datos,tabla,id,where).then(function(d){
             console.log(d);
-            dtl.showSimpleToast("Ha editado con EXITO");
+            
+           // dtl.showSimpleToast("Ha editado con EXITO");
             $scope.isLoading = false;
             
                 if(show===1){
@@ -568,7 +622,7 @@
             var limit = "1";
             Sql.async(filtro,link,tablita,filtro_por,orden,limit).then(function(d) {
             dtl.asigLocal = d;
-                
+            //console.log(d);    
                 angular.forEach(array, function(value, key) {
                     dtl.Edit({'local':local,'descuentos':dtl.asigLocal[0].comision},tabla,value.id,6);
                     dtl.Select({'local':local},'zapato','id', 'ASC', '999');
