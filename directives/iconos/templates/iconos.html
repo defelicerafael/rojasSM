@@ -1,0 +1,12 @@
+
+
+    <div style="background-color: white;" layout="row" layout-align="space-between center" layout-xs="column">
+        <div ng-repeat="i in iconos track by $index" style="text-align: center;">
+            <a ng-href="{{i.link}}" style="text-decoration: none;">
+                <img ng-src="{{i.img}}" alt="{{i.alt}}" title="{{i.alt}}" style="max-width: 100%;height: auto;"/>
+            </a>
+            <div style="color:#b8b8b8; text-align: center; ">
+                {{i.texto}}
+            </div>
+        </div>
+    </div>

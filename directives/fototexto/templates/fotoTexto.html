@@ -1,0 +1,11 @@
+<div style="position:relative;">
+    <img ng-if='foto === "true" ' src="{{fotovar}}" alt="{{altvar}}" title="{{altvar}}" style="width: 100%; height: auto;" />
+    <div ng-if='bloque === "true"' style="position:absolute; top:50%;left:40%; transform: translate(-50%,-40%);">
+        <h2 ng-if='titulo === "true" '>{{titulovar}}</h2>
+        <p ng-if='texto === "true" ' >{{textovar}}</p>
+            <div ng-if='boton === "true" ' style="text-align: center;">
+                <md-button ng-href="{{botonlink}}" target="_blank"><h1>{{botontexto}}</h1></md-button>
+            </div>
+    </div>
+    
+</div>    

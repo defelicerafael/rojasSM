@@ -1,0 +1,97 @@
+
+    <md-content layout="column" layout-padding ng-init="dtl.Select('no','memoria','id','ASC','500'); isLoading=true;">
+      
+        <section>
+        <!--<md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>-->
+            <md-tabs md-dynamic-height md-border-bottom >
+                <md-tab label="MEMORIA" >
+                    <md-subheader class="md-primary"> EDITAR MEMORIAS ({{cantidad}}) </md-subheader>
+                    
+                    <md-list flex>    
+                        <md-list-item class="md-2-line" ng-repeat="datos in dtl.datos | orderBy:'fecha': true track by $index">
+                            <md-icon md-svg-icon="img/icon/ic_assignment_black_24px.svg"></md-icon>
+                                <div class="md-list-item-text">
+                                  <h3>{{datos.nombre_proyecto}}</h3>
+                                  <p> {{ datos.institucion}} || {{ datos.zona}} </p>
+                                  <p> {{ datos.tipo}} </p>
+                                  <p> {{ datos.fecha}} || empresa: {{ datos.empresa }}</p>
+                                </div>
+                                <md-button class="md-secondary md-icon-button" ng-href="#/memoria/id/{{datos.id}}" aria-label="edit">
+                                    <md-icon md-svg-icon="img/icon/ic_edit_black_24px.svg"></md-icon>
+                                </md-button>
+                                <md-button class="md-secondary md-icon-button" ng-click="Delete(datos.id,'memoria');" aria-label="delete" style="background-color:red">
+                                    <md-icon md-svg-icon="img/icon/ic_delete_white_24px.svg"></md-icon>
+                                </md-button>
+                          <md-divider></md-divider>  
+                          </md-list-item>
+                        
+                    </md-list>
+            
+        
+           
+        
+                </md-tab>
+                <md-tab label="NUEVA MEMORIA">
+                    <md-subheader class="md-primary"> CREAR UNA MEMORIA </md-subheader>
+                    <form novalidate class="simple-form" ng-submit="dtl.insert({'institucion':memoria.institucion,'nombre_proyecto':memoria.proyecto,'zona':memoria.zona,'necesidad':memoria.necesidad,'area':memoria.area,'tipo':memoria.tipo,'empresa':memoria.empresa,'beneficiarios':memoria.beneficiarios,'ayudantes':memoria.ayudantes,'anio':memoria.anio,'fecha':memoria.fecha},'memoria')">
+                        
+                        <md-input-container class="md-block">
+                            <label style="color:black;">INSTITUCION</label>
+                            <input ng-model="memoria.institucion" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">PROYECTO</label>
+                            <input ng-model="memoria.proyecto" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">ZONA</label>
+                            <input ng-model="memoria.zona" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">NECESIDAD</label>
+                            <input ng-model="memoria.necesidad" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">AREA</label>
+                            <input ng-model="memoria.area" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">TIPO</label>
+                            <input ng-model="memoria.tipo" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">EMPRESA</label>
+                            <input ng-model="memoria.empresa" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">BENEFICIARIOS</label>
+                            <input ng-model="memoria.beneficiarios" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">AYUDANTES</label>
+                            <input ng-model="memoria.ayudantes" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">A&Ntilde;O</label>
+                            <input ng-model="memoria.anio" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">FECHA (aaaa-mm-dd)</label>
+                            <input ng-model="memoria.fecha" type="date">
+                        </md-input-container>
+                        
+                         
+                        <div layout="row" layout-align="end center">   
+                            <md-button type="submit" class="md-raised md-primary">CREAR</md-button>
+                        </div>
+
+                    </form>
+             </md-tab>
+         </md-tabs>  
+        
+        
+      
+     </section>  
+  </md-content>
+
+</div>

@@ -1,0 +1,55 @@
+<style>
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: white;
+  
+}
+.link {
+  display: block;
+  color: black;
+  background-color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;  
+}
+.link:hover{
+  display: block;
+  background-color: #DCDCDC;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;  
+}
+</style>
+
+    <div layout="column" layout-align="center center" class="sticky">
+        <div style="margin-left: auto;"  >
+            <md-button ng-click="logout();">Logout</md-button>
+        </div>
+        <div style="margin-top:-55px;">
+            <a href="#/" style="text-decoration:none;">
+                <img src="img/logo/logo-rojas-shoe-makers.png" 
+                     alt="logo rojas shoe makers" 
+                     title="rojas shoe makers stock"/>
+            </a>
+        </div>
+        
+        <div style="z-index:10; margin-top:-30px;"  ng-init='dtl.DatosSecciones();' >
+            <ul style="list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: white;">
+                <li ng-repeat="item in datosSecciones | filter:{'sub':'local'} track by $index" style="float:left; color: black;">
+                    <a ng-href="{{item.link}}" style="text-decoration: none;" class="link">
+                        {{ item.nombre | uppercase }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>

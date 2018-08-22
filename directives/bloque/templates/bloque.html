@@ -1,0 +1,9 @@
+<div style="text-align: center;">
+    <h3 ng-if=' h3arriba === "true" '>{{tituloarribafoto}}</h3>
+    <img ng-if='image === "true" ' src="{{foto}}" alt="{{alt}}" title="{{alt}}" style="width: 100%; height: auto;" />
+    <h3 ng-if='h3abajo === "true" '>{{tituloabajofoto}}</h3>
+    <p ng-if='textoabajo === "true" ' style="text-align: left; padding:5%;">{{texto}}</p>
+        <div ng-if='boton === "true" ' style="text-align: center;">
+            <md-button ng-href="{{botonlink}}" target="_blank"><h1>{{botontexto}}</h1></md-button>
+        </div>
+</div>    

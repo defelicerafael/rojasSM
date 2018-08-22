@@ -1,0 +1,132 @@
+<style>
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+   <header></header>
+    <md-content layout="column" layout-padding>
+        <div layout="column" layout-align="center center">
+            <md-button style="width:20%; background-color: black; color:white;" ng-click="dtl.Select('no','locales','fecha_de_venta', 'ASC', '999');dtl.Select('no','medios_de_pago','nombre', 'ASC','999');dtl.Select('no','pago','nombre', 'ASC','999');dtl.Select('no','enviado','nombre', 'ASC','999');dtl.Select('no','canales','nombre', 'ASC','999');dtl.Select('no','facturadora','nombre', 'ASC','999');">CARGAR VENTAS</md-button>
+            <p ng-show="isLoading">CARGANDO VENTAS...</p>
+        </div>
+        <section>
+        <!--<md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>-->
+            <md-tabs md-dynamic-height md-border-bottom >
+                <md-tab label="{{d.nombre}}" ng-repeat="d in dtl.locales | orderBy:'ubicacion'" ng-click="dtl.Select({'local':d.nombre,'pago':dtl.filtro},'zapato','id','ASC','9999');">
+                    <div style="border-top-right-radius: 25px; border-top-left-radius: 25px;background-color: black; color:white; height:40px; padding: 10px;" layout="row" layout-align="space around">
+                        <div>
+                            ({{dtl.zapatosL}})
+                        </div>
+                        <div>Id:
+                            <input ng-model="id" maxlength="7" size="7">
+                        </div>
+                        <div>Pago:
+                            <select ng-model="dtl.filtro" name="filtro">
+                                <option value="NO">NO</option>'pago':dtl.filtro
+                                <option value="SI">SI</option>
+                                <option value="Vendido">Vendido</option>
+                            </select> 
+                        </div>
+                        <div ng-init="dtl.Select('no','modelos','nombre', 'ASC', '100')">Modelos:
+                            <select ng-model="modelos" style="min-width: 200px;">
+                                <option ng-value="m.nombre" ng-repeat="m in dtl.modelos  track by $index" >{{m.nombre}}</option>
+                            </select>
+                        </div>
+                        <div ng-init="dtl.Select('no','colores','nombre', 'ASC', '100')">Colores
+                            <select ng-model="colores" style="min-width: 200px;">
+                                <option ng-value="m.nombre" ng-repeat="m in dtl.colores  track by $index" >{{m.nombre}}</option>
+                            </select>
+                        </div>
+                        <div ng-init="dtl.Select('no','talles','numero', 'ASC', '100')">talles
+                            <select ng-model="talles" style="min-width: 200px;">
+                                <option ng-value="m.numero" ng-repeat="m in dtl.talles  track by $index" >{{m.numero}}</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <img src="img/icon/baseline-archive-24px.png" alt="bajar a excel" style="width: 30px; height: auto; cursor: pointer;"  ng-click="dtl.Excel({'local':d.nombre,'pago':dtl.filtro},'zapato','id','ASC','9999');"/>
+                        </div>    
+                            
+                    </div>
+                    <center>
+                    <div style="width:100%">
+                        
+                        <md-progress-linear class="md-accent md-hue-1" md-mode="indeterminate" ng-if="isLoading" style="color:black;"></md-progress-linear>
+                        <table style="width: 100%; text-align: center; border:1px gray solid;">
+                            <tr>
+                                <th>Id</th>
+                                <th>Modelo</th>
+                                <th>Color</th>
+                                <th>Talle</th>
+                                <th>Modo de pago</th>
+                                <th>Pago</th>
+                                <th>Precio</th>
+                                <th>Fecha</th>
+                                <th>Enviado</th>
+                                <th>Canal</th>
+                                <th>Fact.</th>
+                                <th>$ final.</th>
+                                <th>Comentarios</th>
+                                <th>Grabar</th>
+                               
+                            </tr>
+                            <tr ng-repeat="z in dtl.zapatos | orderBy:d.fecha_de_venta | filter :{'local':d.nombre,'pago':dtl.filtro,'modelo':modelos,'talle':talles,'color':colores,'id':id} track by $index" ng-show="!isLoading">
+                                <td>{{z.id}}</td>
+                                <td>{{z.modelo}}</td>
+                                <td>{{z.color}}</td>
+                                <td>{{z.talle}}</td>
+                                <td>
+                                    
+                                    <select ng-model="z.medios_de_pago" name="medios_de_pago" form="ventas">
+                                        <option ng-repeat="m in dtl.medios_de_pago track by $index" ng-model="z.medios_de_pago" ng-value="{{z.medios_de_pago}}">{{m.nombre}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select ng-model="z.pago" name="pago" form="ventas">
+                                        <option ng-repeat="m in dtl.pago track by $index" ng-value="{{z.pago}}">{{m.nombre}}</option>
+                                    </select>
+                                </td>
+                                <td><input  ng-model="z.precio_de_venta" maxlength="10" size="10" /></td>
+                                <td><input  ng-model="z.fecha_de_venta" maxlength="10" size="10" /></td>
+                                <td>
+                                    <select ng-model="z.enviado" name="enviado" form="ventas">
+                                        <option ng-repeat="m in dtl.enviado track by $index" ng-value="{{z.enviado}}">{{m.nombre}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select ng-model="z.canales" name="canales" form="ventas">
+                                        <option ng-repeat="m in dtl.canales track by $index" ng-value="{{z.canales}}">{{m.nombre}}</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select ng-model="z.facturadora" name="facturadora" form="ventas" >
+                                        <option ng-repeat="m in dtl.facturadora track by $index" ng-value="{{z.facturadora}}">{{m.nombre}}</option>
+                                    </select>
+                                </td>
+                                <td><input  ng-model="z.precio_final" value="{{z.precio_final}}" maxlength="10" size="10"/></td>
+                                <td>
+                                    <input  ng-model="z.comentarios" maxlength="250" size="10" />
+                                </td>
+                                <td ng-click="dtl.Edit({'local':z.local,'medios_de_pago':z.medios_de_pago,'pago':z.pago,'fecha_de_venta':z.fecha_de_venta,'precio_de_venta':z.precio_de_venta,'enviado':z.enviado,'canales':z.canales,'facturadora':z.facturadora,'precio_final':z.precio_final,'comentarios':z.comentarios},'zapato',z.id,'5')"><img src="img/icon/baseline-save-24px.svg" alt="archivar" style="cursor: pointer;"/></td>
+                            </tr>
+                            
+                        </table>
+                        
+                    </div>
+                    </center>    
+                </md-tab>    
+            </md-tabs>  
+        
+        
+      
+     </section>  
+  </md-content>
+

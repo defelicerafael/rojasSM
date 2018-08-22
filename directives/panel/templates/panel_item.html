@@ -1,0 +1,24 @@
+<md-content layout="column" layout-padding>
+    <section>
+        <md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>
+        <md-tabs md-dynamic-height md-border-bottom >
+            <md-tab label="{{titulo}}" >
+                    <item-list
+                        titulo = "{{titulo}}" 
+                        filtro = "{{filtro}}"
+                        tabla = "{{tabla}}"
+                        por = "{{por}}"
+                        orden = "{{orden}}"
+                        limit = "{{limit}}"
+                        check = "{{check}}"
+                        edit = "{{edit}}"
+                        delete = "{{delete}}">
+                    </item-list>
+            </md-tab>
+            <md-tab label="NUEVO">
+                <div ng-include="include"></div> 
+            </md-tab>
+        </md-tabs>  
+    </section>  
+</md-content>
+

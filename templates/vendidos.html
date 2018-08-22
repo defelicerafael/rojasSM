@@ -1,0 +1,75 @@
+<style>
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+   <!--<header></header> -->
+    <md-content layout="column" layout-padding ng-init="dtl.Select('no','locales','id', 'ASC', '999'); isLoading=true;">
+    
+        <section>
+        <!--<md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>-->
+            <md-tabs md-dynamic-height md-border-bottom >
+                <md-tab label="{{d.nombre}}" ng-repeat="d in dtl.locales | orderBy:d.nombre track by $index" ng-click="dtl.SelectOr({'local':d.nombre,'pago':'SI','pago':'Vendido'},'zapato','id','ASC','9999');">
+                    <md-subheader style="background-color: black; color:white;"> {{d.nombre | uppercase}} {{hoy | uppercase}}</md-subheader>
+                    <center>
+                    <div style="width:100%">
+                        
+                        <md-progress-linear class="md-accent md-hue-1" md-mode="indeterminate" ng-if="isLoading" style="color:black;"></md-progress-linear>
+                        <table style="width: 100%; text-align: center; border:1px gray solid;">
+                            <tr>
+                                <th>Id</th>
+                                <th>Modelo</th>
+                                <th>Color</th>
+                                <th>Talle</th>
+                                <th>Modo de pago</th>
+                                <th>Pago</th>
+                                <th>Precio</th>
+                                <th>Fecha</th>
+                                <th>Enviado</th>
+                                <th>Canal</th>
+                                <th>Fact.</th>
+                                <th>$ final.</th>
+                                
+                            </tr>
+                            <tr ng-repeat="z in dtl.zapatos | orderBy:d.id track by $index" ng-show="!isLoading">
+                                <td>{{z.id}}</td>
+                                <td>{{z.modelo}}</td>
+                                <td>{{z.color}}</td>
+                                <td>{{z.talle}}</td>
+                                <td>{{z.medios_de_pago}}</td>
+                               
+                                <td>
+                                    <select ng-model="z.pago" name="pago" form="ventas" ng-init="dtl.Select('no','pago','nombre', 'ASC','999');" ng-change="dtl.Edit({'pago':z.pago},'zapato',z.id,'0')">
+                                        <option ng-repeat="m in dtl.pago track by $index" ng-value="{{z.pago}}">{{m.nombre}}</option>
+                                    </select>
+                                </td>
+                                <td>{{z.precio_de_venta}}</td>
+                                <td>{{z.fecha_de_venta}}</td>
+                                <td>
+                                    <select ng-model="z.enviado" name="enviado" form="ventas" ng-init="dtl.Select('no','enviado','nombre', 'ASC','999');" ng-change="dtl.Edit({'enviado':z.enviado},'zapato',z.id,'0')">
+                                        <option ng-repeat="m in dtl.enviado track by $index" ng-value="{{z.enviado}}">{{m.nombre}}</option>
+                                    </select>
+                                </td>
+                                <td>{{z.canales}}</td>
+                                <td>{{z.facturadora}}</td>
+                                <td>{{z.precio_final}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    </center>    
+                </md-tab>    
+            </md-tabs>  
+        
+        
+      
+     </section>  
+  </md-content>
+

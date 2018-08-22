@@ -1,0 +1,94 @@
+<style>
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+<headerLocal></headerLocal>
+    <md-content layout="column" layout-padding ng-init="isLoading=true; dtl.Select({'pago':'SI','local':dtl.localogin},'zapato','id', 'ASC','9999');">
+        <section>
+            
+            <h1>RESUMEN DE VENTAS {{dtl.localogin | uppercase}}</h1>
+            <table style="width:100%;">
+                <tr>
+                    <th>Vendidos</th>
+                    <th>Unidades</th>
+                    <th>Ventas</th>
+                    <th>Ganancia</th>
+                </tr>
+                <tr>
+                    <td> Hasta hoy</td>
+                    <td>{{dtl.zapatosL}}</td>
+                    <td>${{dtl.sumar(dtl.zapatos,'precio_final')}}</td>
+                    <td>${{dtl.sumar(dtl.zapatos,'comision')}}</td>
+                </tr>
+                <tr ng-init="dtl.selectBetween({'pago':'SI','local':dtl.localogin},'semana','id', 'ASC','9999');">
+                    <td> Esta semana </td>
+                    <td>{{dtl.semanaL}}</td>
+                    <td>${{dtl.sumar(dtl.semana,'precio_final')}}</td>
+                    <td>${{dtl.sumar(dtl.semana,'comision')}}</td>
+                </tr>
+                <tr ng-init="dtl.selectBetween({'pago':'SI','local':dtl.localogin},'mes','id', 'ASC','9999');">
+                    <td> En {{esteMes}}</td>
+                    <td>{{dtl.mesL}}</td>
+                    <td>${{dtl.sumar(dtl.mes,'precio_final')}}</td>
+                    <td>${{dtl.sumar(dtl.mes,'comision')}}</td>
+                </tr>
+                <tr ng-init="dtl.selectBetween({'pago':'SI','local':dtl.localogin},'mesAnterior','id', 'ASC','9999');">
+                    <td> En {{esteMesAnterior}}</td>
+                    <td>{{dtl.mesAnteriorL}}</td>
+                    <td>${{dtl.sumar(dtl.mesAnterior,'precio_final')}}</td>
+                    <td>${{dtl.sumar(dtl.mesAnterior,'comision')}}</td>
+                </tr>
+                <tr ng-init="dtl.selectBetween({'pago':'SI','local':dtl.localogin},'anio','id', 'ASC','9999');">
+                    <td> En 2018 </td>
+                    <td>{{dtl.anioL}}</td>
+                    <td>${{dtl.sumar(dtl.anio,'precio_final')}}</td>
+                    <td>${{dtl.sumar(dtl.anio,'comision')}}</td>
+                </tr>
+            </table>
+        </section>
+        <section ng-init="dtl.Stock({'pago':'SI','local':dtl.localogin},'zapato','id', 'ASC', '999');">
+            <h1>MODELOS Y TALLES VENDIDOS</h1>
+        <div style="width:100%; text-align: center;" >
+            <div layout="row">
+                <div style="width:11%; border:1px black solid;">MODELO</div>
+                <div style="width:11%; border:1px black solid;">COLOR</div>
+                <div style="width:11%; border:1px black solid;">35</div>
+                <div style="width:11%; border:1px black solid;">36</div>
+                <div style="width:11%; border:1px black solid;">37</div>
+                <div style="width:11%; border:1px black solid;">38</div>
+                <div style="width:11%; border:1px black solid;">39</div>
+                <div style="width:11%; border:1px black solid;">40</div>
+                <div style="width:11%; border:1px black solid;">41</div>
+            </div>
+        </div>
+        <md-divider ></md-divider>
+        <div  ng-repeat="(key, value) in dtl.stock track by $index;" ng-class="{'red': ($index %2 === 1), 'black': ($index %2 === 0)}" style="width:100%;text-align: center;">
+            <div ng-repeat="(key2, value2) in value  track by $index" layout="row" >
+                <div style="width:11%; border:1px black solid;">{{ key }}</div>
+                <div style="width:11%; border:1px black solid;">{{ key2 }}</div>
+                <div style="width:11%; border:1px black solid;" ng-repeat="i in [35,36,37,38,39,40,41]">
+                    <div ng-repeat="(key3, value3) in value2" ng-if="key3==i">{{value3}}</div>
+                </div>
+                        
+                                                    
+            </div>          
+        </div>
+        </section>
+        <section>
+            <tablalocal></tablalocal>   
+        </section>
+        
+        
+      
+     
+  </md-content>
+

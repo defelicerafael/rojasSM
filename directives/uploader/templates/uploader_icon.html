@@ -1,0 +1,56 @@
+<style>
+    .thumb {
+    width: 24px;
+    height: 24px;
+    float: none;
+    position: relative;
+    top: 7px;
+}
+
+form .progress {
+    line-height: 15px;
+}
+
+
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
+}
+</style>
+
+<div>
+    <div layout="row" layout-align="start start">
+            <md-button aria-label="Custom Icon Button"  ngf-select="uploadFiles($files, $invalidFiles, direccion, dirImg)" multiple
+                    accept="image/*" ngf-max-height="100000" ngf-max-size="3MB">
+                <md-icon md-svg-icon="directives/uploader/img/icon/ic_file_upload_black_24px.svg"></md-icon>
+                UPLOAD {{titulo}}
+            </md-button>
+    </div>
+    
+</div>    
+  <div>
+      <div>
+          Una vez cargada la imagen <br/>
+          Copia y pega esta direcci&oacute;n en {{titulo}}: <br/>
+          {{insert.logo}}
+      </div> 
+      <div ng-repeat="f in files" style="font:smaller">
+        
+          <md-progress-linear ng-show="f.progress >= 0" md-mode="determinate" value="{{f.progress}}"></md-progress-linear>
+      
+       <span ng-bind="f.progress + '%'"></span>
+      </div>
+      <div ng-repeat="f in errFiles" style="font:smaller">{{f.$error}} {{f.$errorParam}}</div> 
+    
+  {{errorMsg}}
+  </div>
+  <img ng-src="{{dir}}{{foto}}" style="width: 50px; height: auto;" />
+    
+

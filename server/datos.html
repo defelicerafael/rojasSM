@@ -1,0 +1,148 @@
+<style>
+md-icon svg {
+  fill: inherit;
+}
+.fade.ng-enter {
+  transition:0.5s linear all;
+  opacity:0;
+}
+.fade.ng-enter.ng-enter-active {
+  opacity:1;
+}
+.highlight {
+  transition:0.5s linear all;
+}
+.highlight.on-add {
+  background:white;
+}
+.highlight.on {
+  background:yellow;
+}
+.highlight.on-remove {
+  background:black;
+}
+</style>    
+<user-tool-bar></user-tool-bar>
+    <md-content style="background-color:#ffdd11" layout="row" layout-align="center center">
+    <div ng-init='jCtrl.getFoto();jCtrl.runStars();isLoading=true;jCtrl.DatosPosiciones();jCtrl.DatosSkillsUser();' >
+        <md-card style='width:300px; display: inline-table;'>
+            <md-card-header style="background-color: #efce13; text-align: center;">
+                <md-card-avatar>
+                    <img ng-src="{{jCtrl.foto}}"/>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title"><b> MIS HABILIDADES</b> </span>
+                    <span>
+                        Hac&eacute; clic las estrellas!
+                    </span>
+                </md-card-header-text>
+            </md-card-header>
+                
+            <md-card-content style="background-color:white;">
+                <md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>
+                <div layout='row' layout-align='start start'>    
+                    <div flex='40'>ARQUERO:</div>
+                    <div flex='60'>
+                        <span ng-repeat='estrellas in jCtrl.starArquero track by $index'>
+                            <md-icon md-svg-icon="{{estrellas}}" ng-show='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.addStar(0,$index);"></md-icon>
+                            <md-icon style='color:yellow;' md-svg-icon="{{estrellas}}" ng-hide='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.removeStar(0,$index);"></md-icon>
+                        </span>
+                    </div>
+                </div>
+                
+                <div layout='row' layout-align='start start'>    
+                    <div flex='40'>DEFENSA:</div>
+                    <div flex='60'>
+                        <span ng-repeat='estrellas in jCtrl.starDefensa track by $index'>
+                            <md-icon md-svg-icon="{{estrellas}}" ng-show='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.addStar(1,$index);" ></md-icon>
+                            <md-icon style='color:yellow;' md-svg-icon="{{estrellas}}" ng-hide='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.removeStar(1,$index);"></md-icon>
+                        </span>
+                    </div>
+                </div>
+                <div layout='row' layout-align='start start'>    
+                    <div flex='40'>MEDIOCAMPO :</div>
+                    <div flex='60'>
+                        <span ng-repeat='estrellas in jCtrl.starMedioCampo track by $index'>
+                            <md-icon md-svg-icon="{{estrellas}}" ng-show='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.addStar(2,$index);"></md-icon>
+                            <md-icon style='color:yellow;' md-svg-icon="{{estrellas}}" ng-hide='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.removeStar(2,$index);"></md-icon>
+                        </span>
+                    </div>
+                </div>
+                <div layout='row' layout-align='start start'>    
+                    <div flex='40'>DELANTERO:</div>
+                    <div flex='60'>
+                        <span ng-repeat='estrellas in jCtrl.starDelantero track by $index'>
+                            <md-icon md-svg-icon="{{estrellas}}" ng-show='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.addStar(3,$index);"></md-icon>
+                            <md-icon style='color:yellow;' md-svg-icon="{{estrellas}}" ng-hide='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.removeStar(3,$index);"></md-icon>
+                        </span>
+                    </div>
+                </div>
+                <div layout='row' layout-align='start start'>    
+                    <div flex='40'>VELOCIDAD:</div>
+                    <div flex='60'>
+                        <span ng-repeat='estrellas in jCtrl.starVelocidad track by $index'>
+                            <md-icon md-svg-icon="{{estrellas}}" ng-show='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.addStar(4,$index);"></md-icon>
+                            <md-icon style='color:yellow;' md-svg-icon="{{estrellas}}" ng-hide='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.removeStar(4,$index);"></md-icon>
+                        </span>
+                    </div>
+                </div>
+                <div layout='row' layout-align='start start'>    
+                    <div flex='40'>CALIDAD:</div>
+                    <div flex='60'>
+                        <span ng-repeat='estrellas in jCtrl.starCalidad track by $index'>
+                            <md-icon md-svg-icon="{{estrellas}}" ng-show='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.addStar(5,$index);"></md-icon>
+                            <md-icon style='color:yellow;' md-svg-icon="{{estrellas}}" ng-hide='estrellas===jCtrl.starVaciaSVG' ng-click="jCtrl.removeStar(5,$index);"></md-icon>
+                        </span>
+                    </div>
+                </div>
+                            
+            </md-card-content>
+        </md-card>
+        <md-card style='width:300px; display: inline-table;'>
+            <md-card-header style="background-color: #efce13; text-align: center;">
+                <md-card-avatar>
+                    <img ng-src="{{jCtrl.foto}}"/>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title"><b> MIS DATOS</b> </span>
+                    <span>
+                        Estos datos ser&aacute;n p&uacute;blicos!
+                    </span>
+                </md-card-header-text>
+            </md-card-header>
+                
+            <md-card-content>
+                <md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>
+                <div layout='row' layout-align='start start'>    
+                    <md-input-container>
+                        <label>SOBRENOMBRE:</label>
+                        <input ng-model="jCtrl.userSkills[0].sobrenombre" ng->
+                    </md-input-container>
+                </div>
+                <div layout='row' layout-align='start start'>    
+                    <md-input-container>
+                        <label>VIVO POR:</label>
+                        <input ng-model="jCtrl.userSkills[0].zona">
+                    </md-input-container>
+                </div>
+                <div layout='row' layout-align='start start'>    
+                    <md-input-container flex="50">
+                        <label>POSICI&Oacute;N</label>
+                        <md-select name="favoritePosition" ng-model="jCtrl.userSkills[0].experiencia" required>
+                            <md-option ng-repeat="pos in jCtrl.posiciones track by $index" value="{{pos.nombre_corto | uppercase}}">{{pos.nombre | uppercase}}</md-option>
+                        </md-select>
+                        <div class="errors" ng-messages="myForm.favoritePosition.$error">
+                          <div ng-message="required">Completar por favor</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <md-card-actions layout="column">
+                    <md-button class="md-primary md-raised" aria-label="Guardar" ng-click="jCtrl.editSkills({'sobrenombre':jCtrl.userSkills[0].sobrenombre,'zona':jCtrl.userSkills[0].zona,'experiencia':jCtrl.userSkills[0].experiencia})">
+                       GUARDAR
+                    </md-button>
+                </md-card-actions>
+                
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>

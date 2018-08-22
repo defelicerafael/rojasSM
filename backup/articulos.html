@@ -1,0 +1,41 @@
+
+<md-content  layout-padding ng-init="dtl.getArticulosId();">
+    
+    <md-subheader class="md-primary"> {{dtl.datos[0].articulo}} </md-subheader>
+    
+    <form novalidate class="simple-form" ng-submit="dtl.Edit({'articulo':dtl.datos[0].articulo,'link':dtl.datos[0].link,'provedor':dtl.datos[0].provedor,'precio':dtl.datos[0].precio,'telefono':dtl.datos[0].telefono,'contacto':dtl.datos[0].contacto,'direccion':dtl.datos[0].direccion},'articulos',dtl.datos[0].id)">
+        
+        <md-input-container class="md-block">
+            <label style="color:black;">ART&Iacute;CULO</label>
+            <input ng-model="dtl.datos[0].articulo" type="text">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label style="color:black;">LINK</label>
+            <input ng-model="dtl.datos[0].link" type="text">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label style="color:black;">PROVEDOR</label>
+            <input ng-model="dtl.datos[0].provedor" type="text">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label style="color:black;">PRECIO</label>
+            <input ng-model="dtl.datos[0].precio" type="text">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label style="color:black;">TEL&Eacute;FONO</label>
+            <input ng-model="dtl.datos[0].telefono" type="text">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label style="color:black;">CONTACTO</label>
+            <input ng-model="dtl.datos[0].contacto" type="text">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label style="color:black;">DIRECCI&Oacute;N</label>
+            <input ng-model="dtl.datos[0].direccion" type="text">
+        </md-input-container>
+
+        <div layout="row" layout-align="end center">   
+            <md-button type="submit" class="md-raised md-primary">EDITAR</md-button>
+        </div>
+    </form>
+</md-content>    

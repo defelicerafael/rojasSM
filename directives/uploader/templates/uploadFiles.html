@@ -1,0 +1,84 @@
+<style>
+    .thumb {
+    width: 24px;
+    height: 24px;
+    float: none;
+    position: relative;
+    top: 7px;
+}
+
+form .progress {
+    line-height: 15px;
+}
+
+
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
+}
+</style>
+
+<div>
+    <toolbar titulo="COPYMAK PRESUPUESTOS" log="Ir"></toolbar>
+</div>
+<div style="background-color: white;">
+  <h4>Elegir las fotos que desea subir...<br/>
+      Un m&aacute;ximo de 5 fotos a la vez y un m&aacute;ximo de 3MB por foto...
+  </h4>
+  <md-button class="md-primary md-raised" ngf-select="uploadFiles($files, $invalidFiles,'gondola')" multiple
+          accept="image/*" ngf-max-height="100000" ngf-max-size="3MB">
+      Elegir fotos GONDOLA </md-button>
+    <md-button class="md-primary md-raised" ngf-select="uploadFiles($files, $invalidFiles,'general')" multiple
+          accept="image/*" ngf-max-height="100000" ngf-max-size="3MB">
+      Elegir fotos GENERAL </md-button>
+  <br><br>
+  Fotos:
+  <div>
+      <div>
+          {{foto}}
+      </div> 
+      <div ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$errorParam}}
+        
+          <md-progress-linear ng-show="f.progress >= 0" md-mode="determinate" value="{{f.progress}}"></md-progress-linear>
+      
+       <span ng-bind="f.progress + '%'"></span>
+      </div>
+      <div ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</div> 
+    
+  {{errorMsg}}
+  </div>
+  <br/>
+  <br/>
+</div>
+<md-divider></md-divider>
+<div>
+    <md-button ng-click="setDir('../../../images/body/gondola/');" class="md-raised md-primary">GONDOLA</md-button>
+    <md-button ng-click="setDir('../../../images/body/')" class="md-raised md-primary">PRINCIPAL</md-button>
+    <md-subheader class="md-primary"> FOTOS DE LA CARPETA </md-subheader>
+        <div ng-init="showDirectory(dir);" flex="100">
+            <div ng-repeat="foto in fotosDirectorio" class="container"  style="float:left">
+                <img class="img" ng-src="{{dir}}{{foto.img}}" style="width:200px; height: auto;"/>
+                <div class="bottomleft">
+
+                    <md-button class="md-fab" aria-label="delete" confirmed-click="deleteFoto(dir+foto.img);" ng-confirm-click="Desea borrar esta foto?">
+                        <md-icon md-svg-src="images/icon/ic_delete_white_24px.svg" style="color:white;"></md-icon>
+                    </md-button>
+
+                </div>
+                <div class="topleft">
+                    <p style="background-color:white;font-size: 12px;">{{foto.img}}</p>
+                </div>    
+            </div>
+
+        </div>
+</div>
+    <br/>
+    <br/>
+<md-divider></md-divider>

@@ -1,0 +1,154 @@
+<style>
+.selectdemoSelectHeader {
+  /* Please note: All these selectors are only applied to children of elements with the 'selectdemoSelectHeader' class */ }
+  .selectdemoSelectHeader .demo-header-searchbox {
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: 0; }
+  .selectdemoSelectHeader .demo-select-header {
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+    padding-left: 10.667px;
+    height: 48px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto; }
+  .selectdemoSelectHeader md-content._md {
+    max-height: 240px; }
+</style>
+<div>
+    <h1 class="md-headline">PERSONALIZAR BUSQUEDA</h1>
+        <div>
+            <md-radio-group ng-model="que">
+                <md-radio-button value="fecha_de_compra" >Fecha de compra</md-radio-button>
+                <md-radio-button value="fecha_de_venta"> Fecha de venta </md-radio-button>
+            </md-radio-group>
+        </div>
+    <div layout="row">
+        
+        <div>
+            <h4 class="md-title">DESDE:</h4>
+                <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+        </div>
+        <div>
+            <h4 class="md-title">HASTA:</h4>
+                <md-datepicker ng-model="myDate2" md-placeholder="Enter date"></md-datepicker>
+        </div>
+        <div>
+            <md-button style="background-color: black; color: white;" ng-click="selectBetween('no',myDate,myDate2,que)">BUSCAR</md-button>
+        </div>
+    </div>
+    <div style="border-top-right-radius: 25px; border-top-left-radius: 25px;background-color: black; color:white; height:80px; padding: 10px;" layout="row" layout-align="space around">
+                        <div>
+                            ({{zapatosL}})
+                        </div>
+                        <div>Id:
+                            <input ng-model="idF" maxlength="7" size="7">
+                        </div>
+                        <div>Pago:
+                            <select ng-model="pagosF" name="filtro">
+                                <option value="NO">NO</option>
+                                <option value="SI">SI</option>
+                                <option value="Vendido">Vendido</option>
+                            </select> 
+                        </div>
+                        <div ng-init="Select('no','modelos','nombre', 'ASC', '100')">Modelos:
+                            <select ng-model="modelosF" style="min-width: 200px;">
+                                <option ng-value="m.nombre" ng-repeat="m in modelos  track by $index" >{{m.nombre}}</option>
+                            </select>
+                        </div>
+                        <div ng-init="Select('no','colores','nombre', 'ASC', '100')">Colores
+                            <select ng-model="coloresF" style="min-width: 200px;">
+                                <option ng-value="m.nombre" ng-repeat="m in colores  track by $index" >{{m.nombre}}</option>
+                            </select>
+                        </div>
+                        <div ng-init="Select('no','talles','numero', 'ASC', '100')">talles
+                            <select ng-model="tallesF" style="min-width: 200px;">
+                                <option ng-value="m.numero" ng-repeat="m in talles  track by $index" >{{m.numero}}</option>
+                            </select>
+                        </div>
+                        <div ng-init="Select('no','locales','nombre', 'ASC', '100')">locales
+                            <select ng-model="localesF" style="min-width: 200px;">
+                                <option ng-value="m.nombre" ng-repeat="m in locales  track by $index" >{{m.nombre}}</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <img src="img/icon/baseline-archive-24px.png" alt="bajar a excel" style="width: 30px; height: auto; cursor: pointer;"  ng-click="dtl.Excel({'local':d.nombre,'pago':dtl.filtro},'zapato','id','ASC','9999');"/>
+                        </div>    
+                            
+                    </div>
+    <div layout="column">
+        <div>
+            <md-input-container>
+            <label>Columnas</label>
+                <md-select ng-model="thFiltro"
+                           md-on-close="clearSearchTerm()"
+                           data-md-container-class="selectdemoSelectHeader"
+                           multiple>
+                  <md-optgroup label="columnas">
+                    <md-option ng-value="t" ng-repeat="t in thFiltrado">{{t}}</md-option>
+                  </md-optgroup>
+                </md-select>
+            </md-input-container>
+        </div>
+    </div>
+    <div layout="row" layout-align="center center">
+        <div>
+            <table>
+                <th ng-repeat="t in thFiltro track by $index">
+                {{t}}
+                </th>
+                <tr>
+                    <td ng-show="mostrar['id']"> ({{filtered.length}})</td>  
+                    <td ng-show="mostrar['modelo']"></td>
+                    <td ng-show="mostrar['color']"></td>
+                    <td ng-show="mostrar['talle']"></td>
+                    <td ng-show="mostrar['proveedor']"></td>
+                    <td ng-show="mostrar['fecha_de_compra']"></td>
+                    <td ng-show="mostrar['precio_de_compra']">${{sumar(filtered,'precio_de_compra')}}</td>
+                    <td ng-show="mostrar['fecha_de_venta']"></td>
+                    <td ng-show="mostrar['precio_de_venta']">${{sumar(filtered,'precio_de_venta')}}</td>
+                    <td ng-show="mostrar['local']"></td>
+                    <td ng-show="mostrar['descuentos']"></td>
+                    <td ng-show="mostrar['medios_de_pago']"></td>
+                    <td ng-show="mostrar['facturadora']"></td>
+                    <td ng-show="mostrar['pago']"></td>
+                    <td ng-show="mostrar['enviado']"></td>
+                    <td ng-show="mostrar['foto']"></td>
+                    <td ng-show="mostrar['remito']"></td>
+                    <td ng-show="mostrar['precio_final']">${{sumar(filtered,'precio_final')}}</td>
+                    <td ng-show="mostrar['canales']"></td>
+                    <td ng-show="mostrar['comision']">${{sumar(filtered,'comision')}}</td>
+                    
+                </tr>
+                <tr ng-repeat="td in tablajson | orderBy:d.nombre | filter :{'local':localesF,'pago':pagosF,'modelo':modelosF,'talle':tallesF,'color':coloresF,'id':idF} | filter:query as filtered track by $index">
+                    <td ng-show="mostrar['id']">{{td.id}}</td>  
+                    <td ng-show="mostrar['modelo']">{{td.modelo}}</td>
+                    <td ng-show="mostrar['color']">{{td.color}}</td>
+                    <td ng-show="mostrar['talle']">{{td.talle}}</td>
+                    <td ng-show="mostrar['proveedor']">{{td.proveedor}}</td>
+                    <td ng-show="mostrar['fecha_de_compra']">{{td.fecha_de_compra}}</td>
+                    <td ng-show="mostrar['precio_de_compra']">${{td.precio_de_compra}}</td>
+                    <td ng-show="mostrar['fecha_de_venta']">{{td.fecha_de_venta}}</td>
+                    <td ng-show="mostrar['precio_de_venta']">${{td.precio_de_venta}}</td>
+                    <td ng-show="mostrar['local']">{{td.local}}</td>
+                    <td ng-show="mostrar['descuentos']"> {{td.descuentos}}</td>
+                    <td ng-show="mostrar['medios_de_pago']">{{td.medios_de_pago}}</td>
+                    <td ng-show="mostrar['facturadora']">{{td.facturadora}}</td>
+                    <td ng-show="mostrar['pago']">{{td.pago}}</td>
+                    <td ng-show="mostrar['enviado']">{{td.enviado}}</td>
+                    <td ng-show="mostrar['foto']">{{td.foto}}</td>
+                    <td ng-show="mostrar['remito']">{{td.remito}}</td>
+                    <td ng-show="mostrar['precio_final']">${{td.precio_final}}</td>
+                    <td ng-show="mostrar['canales']">{{td.canales}}</td>
+                    <td ng-show="mostrar['comision']">${{td.comision}}</td>
+                </tr>
+                
+            </table>
+        </div>    
+    </div>    
+</div>    

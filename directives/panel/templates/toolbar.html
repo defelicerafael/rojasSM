@@ -1,0 +1,44 @@
+<style>
+md-icon svg {
+  fill: inherit;
+}
+</style>
+
+<md-toolbar style='background-color: background; color:whitesmoke; max-height:80px;'>
+    <div class="md-toolbar-tools" flex="100" layout="row" layout-align="center center"> 
+        <div flex="15">
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="openLeftMenu()">
+                <md-icon md-svg-icon="{{iconToolbar}}"></md-icon>
+            </md-button>
+        </div>    
+        <div flex="45" layout="row" layout-align="start center">
+            <h2 flex md-truncate>{{titulo}}</h2>
+        </div>
+        
+    </div>
+</md-toolbar>
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4" >
+      <md-toolbar>
+        <div layout="row" layout-align="space-between center">
+            <div>
+                <h1 class="md-toolbar-tools" style="color:white;"> MENU </h1>
+            </div>
+            <div>
+                <md-button ng-click="openLeftMenu()" aria-label="close">
+                    <md-icon md-svg-icon="{{iconCerrar}}"></md-icon>
+                </md-button>
+            </div>
+        </div>      
+      </md-toolbar>
+      <md-list>  
+        <md-subheader class="md-no-sticky" style="color:black; background-color: whitesmoke;">Copymak</md-subheader>
+            <md-list-item ng-href="#/articulos" aria-label="photo_library">
+                <p>ARTICULOS</p>
+            </md-list-item>
+            <md-list-item ng-href="#/presupuestos" aria-label="photo_library">
+                <p>PRESUPUESTOS</p>
+            </md-list-item>
+        <md-divider></md-divider>
+    </md-list>
+</md-sidenav>  
+   

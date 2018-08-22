@@ -1,0 +1,26 @@
+<header></header>
+<md-content layout="column" layout-padding>
+    <section>
+        <md-subheader style="background: black; color:white;"> Stock Zapatos ({{dtl.zapatosL}}) <md-button class="md-raised" ng-click="dtl.Select('no','zapato','id', 'ASC', '999');">MOSTRAR REMITOS</md-button></md-subheader>
+        <md-list flex>
+            <md-list-item ng-show="isLoading">
+                <div>CARGANDO REMITOS...</div>
+            </md-list-item>
+            <md-list-item class="md-2-line" ng-repeat="datos in dtl.zapatos | unique: 'remito' | orderBy: '-id'  ">
+                <md-icon md-svg-icon="img/icon/ic_assignment_black_24px.svg"></md-icon>
+                    <div class="md-list-item-text">
+                        <h3> Remito: {{datos.remito}}</h3>
+                    </div>
+                    <md-button class="md-secondary md-icon-button" ng-href="#/remitos/editar/{{datos.remito}}" aria-label="edit">
+                        <md-icon md-svg-icon="img/icon/ic_edit_black_24px.svg"></md-icon>
+                    </md-button>    
+                    <md-button class="md-secondary md-icon-button" ng-click="Delete(datos.remito,'zapato');" aria-label="delete" style="background-color:red">
+                        <md-icon md-svg-icon="img/icon/ic_delete_white_24px.svg"></md-icon>
+                    </md-button>
+              <md-divider></md-divider>  
+              </md-list-item>
+        </md-list>
+    </section>  
+</md-content>
+
+

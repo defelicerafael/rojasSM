@@ -1,0 +1,53 @@
+
+                    <form novalidate class="simple-form" ng-submit="Insert(insert,tabla);" name="userForm">
+                        <md-input-container class="md-block">
+                            <label style="color:black;">Marca</label>
+                            <input ng-model="insert.marca" type="text" required>
+                        </md-input-container>
+                        <upload-icon titulo="Logo" direccion="../../../img/marcas/" dir-img="img/marcas/"></upload-icon>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">Logo</label>
+                            <input ng-model="insert.logo" type="text" required >
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">Categorias</label>
+                            <input ng-model="insert.id_categorias" type="text" required >
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">Descripcion</label>
+                            <input ng-model="insert.descripcion" type="text" required >
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Ubicacion</label>
+                            <md-select ng-model="insert.ubicacion">
+                              <md-option value="Planta baja" selected>Planta baja</md-option>
+                              <md-option value="Planta alta">Planta alta</md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">Telefono</label>
+                            <input ng-model="insert.telefono" type="text" required >
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">Web (http:www.ejemplo.com)</label>
+                            <input ng-model="insert.web" type="url">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">Local</label>
+                            <input ng-model="insert.local" type="number" min="1" max="120" required >
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Mostrar</label>
+                            <md-select ng-model="insert.mostrar">
+                              <md-option value="si" selected>SI</md-option>
+                              <md-option value="no">NO</md-option>
+                            </md-select>
+                        </md-input-container>
+                        
+                         
+                        <div layout="row" layout-align="end center">   
+                            <md-button type="submit" class="md-raised md-primary">CREAR</md-button>
+                        </div>
+
+                    </form>
+            

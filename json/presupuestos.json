@@ -1,0 +1,29 @@
+{
+    "verde":  [
+                        {
+                            "inicio":"30000",
+                            "fin":"40000",
+                            "porcentaje":"35"
+                        },
+                        {
+                            "inicio":"40001",
+                            "fin":"50000",
+                            "porcentaje":"33"
+                        },
+                        {
+                            "inicio":"50001",
+                            "fin":"70000",
+                            "porcentaje":"32"
+                        },
+                        {
+                            "inicio":"70001",
+                            "fin":"100000",
+                            "porcentaje":"31"
+                        },
+                        {
+                            "inicio":"100001",
+                            "fin":"120000",
+                            "porcentaje":"30"
+                        }
+                    ]
+}

@@ -1,0 +1,154 @@
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+<md-content  layout-padding>
+    <div  layout="column" layout-xs="column"    ng-cloak class="md-inline-form" ng-init="dtl.getPresupuestos();">
+        <md-card flex-gt-sm="100" flex="100">
+            <md-card-header>
+                <md-card-avatar>
+                  <img src="img/icon/ic_monetization_on_black_24px.svg"/>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-title">Presupuestos</span>
+                    <span class="md-subhead">Desde tu lugar</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-title>
+             <md-card-title-text layout="row" layout-align="center center">
+               <span class="md-headline"> Presupuesto </span>
+             </md-card-title-text>
+            </md-card-title>
+            <md-card-content>   
+                <div>
+                    <md-input-container>
+                      <label>Cuantos voluntarios?</label>
+                      <input ng-model="dtl.voluntarios" >
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-input-container>
+                      <label>Precio por voluntario?</label>
+                      <input ng-model="dtl.precio_voluntario" value="var|currency" >
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-input-container>
+                      <label>Precio total?</label>
+                      <input ng-model="dtl.precio_total" >
+                    </md-input-container>
+                </div>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button class="md-raised md-primary" aria-label="money" ng-click="dtl.getData(dtl.voluntarios,dtl.precio_voluntario,dtl.precio_total);">
+                        Calcular
+                    </md-button>
+                </md-card-actions>
+                
+                <br/>
+                <span>Presupuesto Empresa =  {{dtl.precio_total | currency}} (100%)</span>
+                <br/>
+                <span>Impuestos =  {{dtl.total_menos_impuestos | currency}} ({{dtl.impuestos}}%)</span>
+                <br/>
+                <span>Total sin impuestos =  {{dtl.totalPago | currency}} (100%)</span>
+                <br/>
+                <span>Productor =  {{dtl.totalProductor | currency}} ({{dtl.productor}}%)</span>
+                <br/>
+                <span>Total sin productor =  {{dtl.totalsinproductor | currency}}(100%)</span>
+                <br/>
+                <span>Costo puesta en marcha =  {{dtl.ganancia | currency}} ({{dtl.porcentajeDtl}}%)</span>
+                <br/>
+                <span>Presupuesto Proyecto =  {{dtl.presupuesto_proyecto | currency}}</span>
+                <br/>
+                
+            </md-card-content> 
+        </md-card>
+        <div  layout="column" layout-xs="column"    ng-cloak class="md-inline-form">
+            ¿Quieres hacer el presupuesto con el tempplate de este proyecto:{{dtl.nombre_proyecto}}?
+            <md-button ng-click="dtl.templates(dtl.nombre_proyecto);">Si</md-button>
+            
+            
+            
+        <md-card flex-gt-sm="100" flex="100">
+            
+            <md-card-content>   
+                <div style="display:inline-table">
+                    <md-input-container>
+                      <label>Artículo</label>
+                      <input ng-model="dtl.articulo" ng-keyup="dtl.getArticulos(dtl.articulo);">
+                    </md-input-container>
+                </div>
+                
+                <div style="display:inline-table">
+                    <md-input-container>
+                      <label>Precio Unidad</label>
+                      <input ng-model="dtl.precio" >
+                    </md-input-container>
+                </div>
+                <div style="display:inline-table">
+                    <md-input-container>
+                      <label>Cantidad</label>
+                      <input ng-model="dtl.cantidad" >
+                    </md-input-container>
+                </div>
+                <br>
+                <md-chips>
+                    <md-chip ng-repeat="art in dtl.datos track by $index" ng-click="dtl.cambiar(art.articulo,art.precio);">{{art.articulo}} - ${{art.precio}} </md-chip>
+                </md-chips>
+                
+                
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button  aria-label="" class="md-raised md-primary" aria-label="money" ng-click="dtl.getPresupuestoEmpresa(dtl.articulo,dtl.precio,dtl.cantidad);">
+                        Agregar
+                    </md-button>
+                </md-card-actions>
+                    <md-input-container>
+                      <label>Porcentaje Margen</label>
+                      <input ng-model="dtl.porcentajeMargen" >
+                    </md-input-container>
+                
+                <table style="width:100%;">
+                    
+                    <tr>
+                        <th>ARTICULO</th><th>PRECIO</th><th>PRECIO {{dtl.porcentajeMargen}}%</th><th>CANTIDAD</th><th>TOTAL</th><th>TOTAL {{dtl.porcentajeMargen}}%</th><th></th>
+                    </tr>
+                    <tr ng-repeat="art in dtl.articulos track by $index">
+                        <td><md-button  aria-label="" ng-click="showAdvanced($event,art.articulo)">{{art.articulo}}</md-button></td>
+                        <td>{{art.precio | currency}}</td>
+                        <td>{{art.precio * (dtl.porcentajeMargen/100 + 1) | currency }}</td>
+                        <td>{{art.cantidad}}</td>
+                        <td>{{art.total | currency}}</td>
+                        <td>{{art.total * (dtl.porcentajeMargen/100 + 1) | currency}}</td>
+                        <td style="color:red;cursor:pointer;" ng-click="dtl.removeItem($index)">X</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{dtl.totalTodo | currency}}</td>
+                        <td>{{dtl.totalTod | currency}}</td>
+                        <td></td>
+                    </tr>
+                </table>    
+                    
+                
+            </md-card-content> 
+        </md-card>
+        
+        
+        
+    </div>  
+        
+       
+        
+    </div>    
+</md-content>

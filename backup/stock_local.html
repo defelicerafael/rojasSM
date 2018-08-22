@@ -1,0 +1,86 @@
+<style type="text/css">
+.red {
+    background-color: #E8E8E8;
+    
+}
+
+.black {
+    background-color: #DCDCDC; 
+}
+</style>
+<!--<header></header>-->
+<md-content layout="column" layout-padding isLoading="true;" ng-init="dtl.Stock({'pago':'NO','local':dtl.localogin},'zapato','id', 'ASC', '999');">
+   
+    <section>
+        <md-divider ></md-divider>
+        <md-toolbar layout="row" style="background: black; color:white;">
+            <div class="md-toolbar-tools">
+                <span>Buscar Stock</span>
+            </div>
+        </md-toolbar>
+        <div layout="row" layout-align="center center">
+            <div>
+                <md-input-container>
+                    <label>Modelos</label>
+                    <md-select placeholder="Filtrar por modelo" ng-model="modelo" md-on-open="dtl.Select('no','modelos','nombre', 'ASC', '100')" style="min-width: 200px;">
+                        <md-option ng-value="m.nombre" ng-repeat="m in dtl.modelos  track by $index">{{m.nombre}}</md-option>
+                    </md-select>
+                </md-input-container >
+            </div>
+            <div>
+                <md-input-container>
+                <label>Color</label>
+                    <md-select placeholder="Filtrar por color" ng-model="color" md-on-open="dtl.Select('no','colores','nombre', 'ASC', '100')" style="min-width: 200px;">
+                        <md-option ng-value="c.nombre" ng-repeat="c in dtl.colores track by $index">{{c.nombre}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div>
+                <md-input-container>
+                <label>Talle</label>
+                    <md-select placeholder="Filtrar por talle" ng-model="talle" md-on-open="dtl.Select('no','talles','numero', 'ASC', '100')" style="min-width: 200px;">
+                        <md-option ng-value="t.numero" ng-repeat="t in dtl.talles track by $index">{{t.numero}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+               
+        
+        <md-button  class="md-raised" style="background: black; color:white;" ng-click="dtl.buscar(modelo,color,talle,dtl.localogin);">BUSCAR</md-button>
+        <md-button  class="md-raised" style="background: white; color:black; border: 1px solid black;" ng-click="dtl.buscar('no');talle=''; color='';modelo='';">RESET</md-button>
+        </div>
+        <md-divider ></md-divider>
+        <md-toolbar layout="row" style="background: black; color:white;">
+            <div class="md-toolbar-tools">
+                <span>Stock Zapatos ({{dtl.contar}})</span>
+            </div>
+        </md-toolbar>
+        <div style="width:100%; text-align: center;">
+            <div layout="row">
+                <div style="width:11%; border:1px black solid;">MODELO</div>
+                <div style="width:11%; border:1px black solid;">COLOR</div>
+                <div style="width:11%; border:1px black solid;">35</div>
+                <div style="width:11%; border:1px black solid;">36</div>
+                <div style="width:11%; border:1px black solid;">37</div>
+                <div style="width:11%; border:1px black solid;">38</div>
+                <div style="width:11%; border:1px black solid;">39</div>
+                <div style="width:11%; border:1px black solid;">40</div>
+                <div style="width:11%; border:1px black solid;">41</div>
+            </div>
+        </div>
+        <md-divider ></md-divider>
+        <div  ng-repeat="(key, value) in dtl.stock track by $index;" ng-class="{'red': ($index %2 === 1), 'black': ($index %2 === 0)}" style="width:100%;text-align: center;">
+            <div ng-repeat="(key2, value2) in value  track by $index" layout="row" >
+                <div style="width:11%; border:1px black solid;">{{ key }}</div>
+                <div style="width:11%; border:1px black solid;">{{ key2 }}</div>
+                <div style="width:11%; border:1px black solid;" ng-repeat="i in [35,36,37,38,39,40,41]">
+                    <div ng-repeat="(key3, value3) in value2" ng-if="key3==i">{{value3}}</div>
+                </div>
+                        
+                                                    
+            </div>          
+        </div>
+        <md-divider ></md-divider>
+    </section>  
+</md-content>
+
+

@@ -1,0 +1,75 @@
+<header></header>
+<md-content layout="column" layout-padding>
+    <section>
+        <md-subheader class="md-primary"> AGREGAR {{dtl.id_tabla | uppercase}} </md-subheader>
+            <form novalidate class="simple-form" ng-submit="dtl.insertTabla(dtl.item,dtl.id_tabla)">
+                <md-input-container class="md-block" ng-if="dtl.id_tabla!=='talles'">
+                    <label>Nombre</label>
+                    <input required name="nombre" ng-model="dtl.item.nombre" type='text'>
+                    <div ng-messages="projectForm.nombre.$error">
+                      <div ng-message="required">Le solicito por favor el nombre</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" ng-if="dtl.id_tabla=='usuarios'">
+                    <label>Pass</label>
+                    <input required name="pass" ng-model="dtl.item.pass" type='password'>
+                    <div ng-messages="projectForm.pass.$error">
+                      <div ng-message="required">Le solicito por favor el password</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" ng-if="dtl.id_tabla=='usuarios'">
+                    <label>Admin</label>
+                    <input required name="admin" ng-model="dtl.item.admin" type='number'>
+                    <div ng-messages="projectForm.admin.$error">
+                      <div ng-message="required">Le solicito por favor el numero de admin</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" ng-if="dtl.id_tabla=='secciones'">
+                    <label>Link</label>
+                    <input required name="link" ng-model="dtl.item.link" type='text'>
+                    <div ng-messages="projectForm.link.$error">
+                      <div ng-message="required">Le solicito por favor el link</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" ng-if="dtl.id_tabla=='locales'">
+                    <label>Email</label>
+                    <input required name="email" ng-model="dtl.item.email" type='text'>
+                    <div ng-messages="projectForm.email.$error">
+                      <div ng-message="required">Le solicito por favor el email</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" ng-if="dtl.id_tabla=='descuentos'">
+                    <label>Porcentaje</label>
+                    <input required name="porcentaje" ng-model="dtl.item.porcentaje" type='number'>
+                    <div ng-messages="projectForm.porcentaje.$error">
+                      <div ng-message="required">Le solicito por favor el porcentaje</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" ng-if="dtl.id_tabla=='locales'">
+                    <label>Comision</label>
+                    <input required name="comision" ng-model="dtl.item.comision" type='number'>
+                    <div ng-messages="projectForm.comision.$error">
+                      <div ng-message="required">Le solicito por la comision</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" ng-if="dtl.id_tabla=='talles'">
+                    <label>Numero</label>
+                    <input required name="numero" ng-model="dtl.item.numero" type='number'>
+                    <div ng-messages="projectForm.numero.$error">
+                      <div ng-message="required">Le solicito por el numero de talle</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" ng-if="dtl.id_tabla=='locales'">
+                    <label>Ubicacion</label>
+                    <input required name="ubicacion" ng-model="dtl.item.ubicacion" type='number'>
+                    <div ng-messages="projectForm.ubicacion.$error">
+                      <div ng-message="required">Le solicito por el numero de ubicacion</div>
+                    </div>
+                </md-input-container>
+                <div layout="row" layout-align="end center">   
+                    <md-button type="submit" class="md-raised md-primary">CREAR</md-button>
+                </div>
+            </form>
+     </section>  
+</md-content>
+

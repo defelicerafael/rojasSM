@@ -1,0 +1,114 @@
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+<header></header> 
+<md-content layout="column" layout-padding isLoading="true;">
+    <section>
+        <md-divider ></md-divider>
+        <md-toolbar layout="row" style="background: black; color:white;">
+            <div class="md-toolbar-tools">
+                <span>ASIGNAR ZAPATO A LOCAL</span>
+            </div>
+        </md-toolbar>
+        <div layout="row" layout-align="center center">
+            <div>
+            <md-input-container class="md-block">
+            <label>Modelos</label>
+                <md-select placeholder="Filtrar por modelo" ng-model="modelo" md-on-open="dtl.Select('no','modelos','nombre', 'ASC', '100')" style="min-width: 200px;">
+                    <md-option ng-value="m.nombre" ng-repeat="m in dtl.modelos  track by $index">{{m.nombre}}</md-option>
+                </md-select>
+            </md-input-container >
+            </div>
+            <div>
+            <md-input-container class="md-block">
+            <label>Color</label>
+                <md-select placeholder="Filtrar por color" ng-model="color" md-on-open="dtl.Select('no','colores','nombre', 'ASC', '100')" style="min-width: 200px;">
+                    <md-option ng-value="c.nombre" ng-repeat="c in dtl.colores track by $index">{{c.nombre}}</md-option>
+                </md-select>
+            </md-input-container>
+            </div>
+            <div>
+            <md-input-container class="md-block">
+            <label>Talle</label>
+                <md-select placeholder="Filtrar por talle" ng-model="talle" md-on-open="dtl.Select('no','talles','numero', 'ASC', '100')" style="min-width: 200px;">
+                    <md-option ng-value="t.numero" ng-repeat="t in dtl.talles track by $index">{{t.numero}}</md-option>
+                </md-select>
+            </md-input-container>
+            </div>
+            <div>
+            <md-input-container class="md-block">
+            <label>Local</label>
+                <md-select placeholder="Filtrar por locales" ng-model="local" md-on-open="dtl.Select('no','locales','nombre', 'ASC', '100')" style="min-width: 200px;">
+                    <md-option ng-value="p.nombre" ng-repeat="p in dtl.locales track by $index">{{p.nombre}}</md-option>
+                </md-select>
+            </md-input-container>
+            </div>    
+        <md-button  class="md-raised" style="background: black; color:white;" ng-click="dtl.Select({'modelo':modelo,'color':color,'talle':talle,'local':local},'zapato','id', 'ASC', '999');">BUSCAR</md-button>
+        <md-button  class="md-raised" style="background: white; color:black; border: 1px solid black;" ng-click="dtl.Select('no','zapato','id', 'ASC', '999');">MOSTRAR TODOS</md-button>
+        </div>
+        <md-divider ></md-divider>
+        <md-toolbar layout="row" style="background: black; color:white;">
+            <div class="md-toolbar-tools">
+                <span>Stock Zapatos ({{dtl.zapatosL}})</span> <span ng-show="isLoading" style="margin-left:10px;">CARGANDO STOCK...</span>
+            </div>
+        </md-toolbar>
+        <div style="padding: 10px;">
+            <md-checkbox    aria-label="Select All"
+                             ng-checked="isChecked()"
+                             md-indeterminate="isIndeterminate()"
+                             ng-click="toggleAll()">
+                  <span ng-if="isChecked()">Des-</span>Seleccionar todos
+            </md-checkbox>
+        </div>
+        <div>
+            <md-select ng-change="" placeholder="Asignar local" ng-model="Alocal" md-on-open="dtl.Select('no','locales','nombre', 'ASC', '100')" style="min-width: 200px;">
+                <md-option ng-value="m.nombre" ng-repeat="m in dtl.locales  track by $index" >{{m.nombre}}</md-option>
+            </md-select>
+        </div>
+        <md-button  class="md-raised" style="background: black; color:white;" ng-click="dtl.asignar(selected,'zapato',Alocal);">ASIGNAR</md-button>
+        
+        <table style="width:100%;">
+            <tr>
+                <th>Asignar</th>
+                <th>ID</th>
+                <th>MODELO</th>
+                <th>COLOR</th>
+                <th>TALLE</th>
+                <th>LOCAL</th>
+                <th>PAGO</th>
+            </tr>
+            <tr ng-repeat="x in dtl.zapatos | filter :{'pago':'NO'} track by $index">
+                <td style="text-align:center;">
+                    <md-checkbox   ng-checked="exists(x, selected)" ng-click="toggle(x, selected)" aria-label="Disabled checkbox" ></md-checkbox>
+                </td>
+              <td>{{ x.id}}</td>
+              <td>{{ x.modelo}}</td>
+              <td>{{ x.color }}</td>
+              <td>{{ x.talle}}</td>
+            <!--  <td>{{ x.proveedor}}</td>-->
+            <!--  <td>{{ x.fecha_de_compra}}</td>-->
+              <td>{{ x.local}}</td>
+              <td>{{ x.pago}}</td>
+
+           <!--   <td>
+                <md-select ng-change="dtl.Edit({'local':x.local},'zapato',x.id,'0');" placeholder="Asignar local" ng-model="x.local" md-on-open="dtl.Select('no','locales','nombre', 'ASC', '100')" style="min-width: 200px;">
+                    <md-option ng-value="m.nombre" ng-repeat="m in dtl.locales  track by $index" >{{m.nombre}}</md-option>
+                </md-select>
+              </td>-->
+            </tr>
+        </table>
+        <md-divider ></md-divider>
+    </section>  
+</md-content>
+
+

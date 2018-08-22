@@ -1,0 +1,30 @@
+<md-content  layout-padding>
+    <div layout-align="center center" layout="column" 
+         style="background-color: black;
+        color: white;
+        border-radius: 10px;
+        margin-top:50px;
+        margin-left: auto;
+        margin-right:  auto;
+        text-align: center;        
+        width:546px;
+        height:265px;
+       ">
+         <form name="projectForm" ng-submit="dtl.login(usuario, pass);">
+            <md-progress-linear class="md-accent md-hue-1" md-mode="indeterminate" ng-if="isLoading" style="color:black;"></md-progress-linear>
+            <div>
+                Usuario<br/>
+                <input type="text" ng-model="usuario" autocomplete="ingrese su usuario" required/>
+            </div>
+            <div>
+                Contrase&ntilde;a<br/>
+                <input type="password" ng-model="pass" autocomplete="ingrese su contraseña" required/>
+            </div>
+            <div style="margin-top:4px;">
+                <md-button class="md-raised" type="submit">Login</md-button>
+            </div>    
+                
+        </form>
+        
+    </div>    
+</md-content>

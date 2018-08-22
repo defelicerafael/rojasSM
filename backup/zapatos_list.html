@@ -1,0 +1,96 @@
+<header></header>
+    <md-content layout="column" layout-padding ng-init="dtl.Select('no','zapato','id', 'ASC', '999'); isLoading=true;">
+       
+        <section>
+        <!--<md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>-->
+            
+                    <md-subheader style="background-color: black; color:white;"> NUEVO ZAPATO </md-subheader>
+                    <form novalidate class="simple-form" ng-submit="dtl.insertZ({'modelo':modelo,'color':color,'proveedor':proveedor,'fecha_de_compra':fechaCompra,'precio_de_compra':precioCompra,'remito':remito,'local':'Showroom','precio_de_venta':precioVenta,'pago':'NO','enviado':'NO'},'zapato',t35,t36,t37,t38,t39,t40,t41)">
+
+                        <div>
+                            <h4>Fecha de compra</h4>
+                            <md-datepicker ng-model="fechaCompra" md-placeholder="Enter date"></md-datepicker>
+                        </div>
+                        <md-input-container class="md-block">
+                        
+                        <label>Modelos</label>
+                            <md-select placeholder="Asignar modelo" ng-model="modelo" md-on-open="dtl.Select('no','modelos','nombre', 'ASC', '100')" style="min-width: 200px;">
+                                <md-option ng-value="m.nombre" ng-repeat="m in dtl.modelos  track by $index">{{m.nombre}}</md-option>
+                            </md-select>
+                        </md-input-container >
+                        <md-input-container class="md-block">
+                        <label>Color</label>
+                            <md-select placeholder="Asignar color" ng-model="color" md-on-open="dtl.Select('no','colores','nombre', 'ASC', '100')" style="min-width: 200px;">
+                                <md-option ng-value="c.nombre" ng-repeat="c in dtl.colores track by $index">{{c.nombre}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                        <label>35</label>
+                            <input required name="t35" ng-model="t35" type='number'>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                        <label>36</label>
+                            <input required name="t36" ng-model="t36" type='number'>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                        <label>37</label>
+                            <input required name="t37" ng-model="t37" type='number'>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                        <label>38</label>
+                            <input required name="t38" ng-model="t38" type='number'>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                        <label>39</label>
+                            <input required name="t39" ng-model="t39" type='number'>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                        <label>40</label>
+                            <input required name="t40" ng-model="t40" type='number'>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                        <label>41</label>
+                            <input required name="t41" ng-model="t41" type='number'>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                        <label>Proveedor</label>
+                            <md-select placeholder="Asignar proveedor" ng-model="proveedor" md-on-open="dtl.Select('no','proveedor','nombre', 'ASC', '100')" style="min-width: 200px;">
+                                <md-option ng-value="p.nombre" ng-repeat="p in dtl.proveedores track by $index">{{p.nombre}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        
+                        <md-input-container class="md-block">
+                            <label>Precio de compra</label>
+                            <input required name="precioCompra" ng-model="precioCompra" type='number'>
+                            <div ng-messages="projectForm.clienteEdadCumple.$error">
+                              <div ng-message="required">Le solicito por favor el precio de compra</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Precio de venta</label>
+                            <input required name="precioVenta" ng-model="precioVenta" type='number'>
+                            <div ng-messages="projectForm.precioVenta.$error">
+                              <div ng-message="required">Le solicito por favor el precio de venta</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Remito</label>
+                            <input required name="remito" ng-model="remito" type='text'>
+                            <div ng-messages="projectForm.remito.$error">
+                              <div ng-message="required">Le solicito por favor el remito</div>
+                            </div>
+                        </md-input-container>
+                      <!--  <md-input-container class="md-block">
+                            <label>Cantidad</label>
+                            <input required name="cantidad" ng-model="cantidad" type='number'>
+                        </md-input-container>-->
+                        
+                        
+                        <div layout="row" layout-align="end center">   
+                            <md-button type="submit" class="md-raised md-primary">CREAR</md-button>
+                        </div>
+
+                    </form>
+     </section>  
+  </md-content>
+

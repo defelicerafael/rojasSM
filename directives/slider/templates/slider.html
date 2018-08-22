@@ -1,0 +1,52 @@
+<style>
+    /* The starting CSS styles for the enter animation */
+.fade.ng-enter {
+  transition:0.6s linear all;
+  position: relative;
+  opacity: 0.1;
+  overflow: hidden;
+  -webkit-transform: rotateY(90deg); /* Safari */
+    transform: rotateY(90deg);
+}
+
+/* The finishing CSS styles for the enter animation */
+.fade.ng-enter.ng-enter-active {
+  overflow: hidden;
+  position: relative;
+  opacity:1;
+  overflow: hidden;
+  -webkit-transform: rotateX(0deg); /* Safari */
+    transform: rotateX(0deg);
+}
+
+</style>
+    <div ng-if='tipo === "foto" ' style="background-color: white; position:relative;" layout-align="center center" layout="row">
+       <div style="position: absolute; top: 8px; left: 16px; font-size: 18px;">
+            <md-button  aria-label="left" ng-click="ruedatexto('resta');">
+                <md-icon md-svg-src="img/icon/ic_keyboard_arrow_left_white_24px.svg"></md-icon>
+            </md-button>
+        </div>
+        <div ng-repeat="f in foto track by $index">
+       <!-- <a ng-href="{{f.link}}" style="text-decoration: none;" ng-if="isThis($index)" ><!--class="fade"-->
+            <img ng-if="isThis($index)"  ng-src="{{f.img}}" alt="{{f.alt}}" title="{{f.atl}}" style="max-width:100%;height: auto;"/>
+       <!-- </a>-->
+        </div>
+        <div style="position: absolute; top: 8px; right: 16px; font-size: 18px;">
+            <md-button  aria-label="right" ng-click="ruedatexto('suma');">
+                <md-icon md-svg-src="img/icon/ic_keyboard_arrow_right_white_24px.svg"></md-icon>
+            </md-button>
+        </div>    
+    </div>
+   <!-- <div ng-if='tipo === "texto" ' style="text-align: center" layout="row" layout-align="center">
+        <md-button  aria-label="left" ng-click="ruedatexto('resta');">
+            <md-icon md-svg-src="img/icon/ic_keyboard_arrow_left_black_24px.svg"></md-icon>
+        </md-button>
+        <div ng-repeat="t in textos track by $index" ng-if="isThis($index)" class="fade">
+            <p style="text-decoration: none;">{{t.txt}}</p>
+            <h4 >{{t.firma}} / {{t.empresa}}</h4>
+        </div>
+        <md-button  aria-label="right" ng-click="ruedatexto('suma');">
+            <md-icon md-svg-src="img/icon/ic_keyboard_arrow_right_black_24px.svg"></md-icon>
+        </md-button>
+    </div>-->
+

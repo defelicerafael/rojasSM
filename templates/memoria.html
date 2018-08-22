@@ -1,0 +1,57 @@
+<md-content  layout-padding ng-init="dtl.getMemoriaId();">
+    
+    <md-subheader class="md-primary"> {{dtl.datos[0].nombre_proyecto}} </md-subheader>
+    
+    <form novalidate class="simple-form" ng-submit="dtl.Edit({'institucion':dtl.datos[0].institucion,'nombre_proyecto':dtl.datos[0].nombre_proyecto,'zona':dtl.datos[0].zona,'necesidad':dtl.datos[0].necesidad,'area':dtl.datos[0].area,'tipo':dtl.datos[0].tipo,'empresa':dtl.datos[0].empresa,'beneficiarios':dtl.datos[0].beneficiarios,'ayudantes':dtl.datos[0].ayudantes,'anio':dtl.datos[0].anio,'fecha':dtl.datos[0].fecha},'memoria',dtl.datos[0].id,1)">
+        
+        <md-input-container class="md-block">
+                            <label style="color:black;">INSTITUCION</label>
+                            <input ng-model="dtl.datos[0].institucion" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">PROYECTO</label>
+                            <input ng-model="dtl.datos[0].nombre_proyecto" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">ZONA</label>
+                            <input ng-model="dtl.datos[0].zona" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">NECESIDAD</label>
+                            <input ng-model="dtl.datos[0].necesidad" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">AREA</label>
+                            <input ng-model="dtl.datos[0].area" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">TIPO</label>
+                            <input ng-model="dtl.datos[0].tipo" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">EMPRESA</label>
+                            <input ng-model="dtl.datos[0].empresa" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">BENEFICIARIOS</label>
+                            <input ng-model="dtl.datos[0].beneficiarios" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">AYUDANTES</label>
+                            <input ng-model="dtl.datos[0].ayudantes" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">A&Ntilde;O</label>
+                            <input ng-model="dtl.datos[0].anio" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">FECHA (aaaa-mm-dd)</label>
+                            <input ng-model="dtl.datos[0].fecha" type="text">
+                        </md-input-container>
+
+        <div layout="row" layout-align="end center">   
+            <md-button type="submit" class="md-raised md-primary">EDITAR</md-button>
+            <md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>
+        </div>
+    </form>
+</md-content>    

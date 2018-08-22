@@ -1,0 +1,32 @@
+
+    <md-list ng-init="Select(filtro,tabla,por,orden,limit);" isLoading="true;" flex>    
+        <md-list-item class="md-2-line" ng-repeat="datos in todos track by $index">
+            <img ng-src="{{datos.img}}" class="md-avatar" alt="{{datos.titulo}}" title='{{datos.titulo}}'/>
+                <div class="md-list-item-text">
+                  <h3>{{ datos.titulo  }}</h3>
+                  
+                </div>
+                <div layout="row" layout-align="end end">
+                   
+                <div ng-if='check === "true";'>
+                    <md-checkbox ng-model="datos.mostrar" aria-label="Checkbox 1" ng-true-value="'si'"
+                        ng-false-value="'no'" ng-change="Edit({'mostrar':datos.mostrar},titulo,datos.id,0,'id')">
+                        &iquest;Mostrar?: {{ datos.mostrar }}
+                    </md-checkbox>
+                </div>
+                <div ng-if='edit === "true";'>
+                    <md-button class="md-icon-button" ng-href="#/panel/{{titulo}}/edit/{{datos.id}}" aria-label="edit">
+                        <md-icon md-svg-icon="img/icon/ic_edit_black_24px.svg"></md-icon>
+                    </md-button>
+                </div>
+                <div ng-if='delete === "true";'>
+                    <md-button class="md-icon-button" ng-click="Delete(datos.id,tabla);" aria-label="delete" style="background-color:red">
+                        <md-icon md-svg-icon="img/icon/ic_delete_white_24px.svg"></md-icon>
+                    </md-button>
+                </div>    
+          <md-divider></md-divider>
+            </div>
+          <md-divider></md-divider>  
+        </md-list-item>
+    </md-list>
+   

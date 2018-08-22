@@ -1,0 +1,71 @@
+<header></header>  
+    <md-content layout="column" layout-padding ng-init="dtl.getPresupuestosT(); isLoading=true;">
+      
+        <section>
+        <!--<md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>-->
+            <md-tabs md-dynamic-height md-border-bottom >
+                <md-tab label="PRESUPUESTOS" >
+                    <md-subheader class="md-primary"> PRESUPUESTOS ({{cantidad}})</md-subheader>
+                    
+                    <md-list flex>    
+                        <md-list-item class="md-2-line" ng-repeat="datos in dtl.datos | orderBy:'fecha': true track by $index">
+                            <md-icon md-svg-icon="img/icon/ic_assignment_black_24px.svg"></md-icon>
+                                <div class="md-list-item-text">
+                                  <h3>{{datos.proyecto}}</h3>
+                                  <p> {{ datos.empresa}} || {{ datos.fecha}} </p>
+                                  <p> {{ datos.precio | currency}} </p>
+                                  <p> {{ datos.voluntarios}} voluntarios || Precio por voluntario: {{ datos.precio_voluntario | currency}}</p>
+                                </div>
+                                <md-button class="md-secondary md-icon-button" ng-href="#/presupuestos/id/{{datos.id}}" aria-label="edit">
+                                    <md-icon md-svg-icon="img/icon/ic_edit_black_24px.svg"></md-icon>
+                                </md-button>
+                                <md-button class="md-secondary md-icon-button" ng-click="Delete(datos.id,'presupuestos');" aria-label="delete" style="background-color:red">
+                                    <md-icon md-svg-icon="img/icon/ic_delete_white_24px.svg"></md-icon>
+                                </md-button>
+                          <md-divider></md-divider>  
+                          </md-list-item>
+                        
+                    </md-list>
+            
+        
+           
+        
+                </md-tab>
+                <md-tab label="NUEVO PRESUPUESTO">
+                    <md-subheader class="md-primary"> CREAR UN PRESUPUESTO </md-subheader>
+                    <form novalidate class="simple-form" ng-submit="dtl.insert({'empresa':dtl.empresa,'proyecto':dtl.proyecto,'fecha':dtl.fecha},'presupuestos')">
+                        ¿Quieres usar algunos de estos templates?
+                        <p ng-repeat="datos in dtl.datos | unique: 'proyecto' track by $index" ng-click="dtl.cambiarP(datos.proyecto);">{{datos.proyecto}}</p>
+                        
+                        <md-input-container class="md-block">
+                            <label style="color:black;">EMPRESA</label>
+                            <input ng-model="dtl.empresa" type="text">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label style="color:black;">PROYECTO</label>
+                            <input ng-model="dtl.proyecto" type="text">
+                        </md-input-container>
+                        
+                        
+                            
+                        
+                        
+                        <md-input-container class="md-block">
+                            <label style="color:black;">FECHA (aaaa-mm-dd)</label>
+                            <input ng-model="dtl.fecha" type="text">
+                        </md-input-container>
+                         
+                        <div layout="row" layout-align="end center">   
+                            <md-button type="submit" class="md-raised md-primary">CREAR</md-button>
+                        </div>
+
+                    </form>
+             </md-tab>
+         </md-tabs>  
+        
+        
+      
+     </section>  
+  </md-content>
+
+</div>
