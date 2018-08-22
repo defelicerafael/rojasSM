@@ -208,7 +208,7 @@
         dtl.EditObj = function (datosi,tablai,idi,show){
             //console.log(datosi,tabla,id,show);
             var datosIgresados = angular.fromJson(datosi);
-           // console.log(datosIgresados[0]);
+            console.log(datosIgresados[0]);
             $scope.isLoading=true;
             var where = 'id';
             var datos = datosIgresados[0];
@@ -217,46 +217,14 @@
             var id = idi;
             var show = show;
             SqlEdit.async(link,datos,tabla,id,where).then(function(d){
-            console.log(d);
-            
+                console.log(d);
            // dtl.showSimpleToast("Ha editado con EXITO");
             $scope.isLoading = false;
-            
                 if(show===1){
                     window.history.back(1);
                 }
-                if(show==='5'){
-                   console.log('Entre',datos,id);
-                    $http({method: 'POST', url: 'server/email.php', data: {datos:datos,id:id}}).
-                      then(function(response) {
-                        $scope.status = response.status;
-                        $scope.data = response.data;
-                        console.log($scope.data);
-                      }, function(response) {
-                        $scope.data = response.data || 'Request failed';
-                      console.log($scope.data);  
-                      $scope.status = response.status;
-                    });
-                  
-                    
-                }
-                if(show==='6'){
-                   console.log('Entre',datos,id);
-                    $http({method: 'POST', url: 'server/emailLocal.php', data: {id:id}}).
-                      then(function(response) {
-                        $scope.status = response.status;
-                        $scope.data = response.data;
-                        console.log($scope.data);
-                      }, function(response) {
-                        $scope.data = response.data || 'Request failed';
-                      console.log($scope.data);  
-                      $scope.status = response.status;
-                    });
-                  
-                    
-                }
-            });
-        };
+                });
+            };
             
         dtl.insert = function (datos,tabla){
            // console.log(datos,tabla);
