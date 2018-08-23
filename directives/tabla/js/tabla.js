@@ -17,7 +17,7 @@
                 }
                         
             },
-            controller : function($scope,$element,Sql,$timeout){
+            controller : function($scope,$element,Sql,$timeout,$window){
                 $scope.traigoTabla = [];
                 $scope.th = [];
                 $scope.mostrar = [];
@@ -207,6 +207,10 @@
                 $scope.co = $scope.sumar($scope.tablajson,'comision');
             }; 
             
+            $scope.Excel = function (){
+               // console.log('entre a excel');
+            $window.location.href = '../../../server/excel.php?filtro=no&tabla=zapato&filtro_por=id&limit=9999&orden=ASC';
+        }; 
             
             }
         };

@@ -12,13 +12,15 @@ table tr:nth-child(even) {
 }
 </style>
    <header></header>
-    <md-content layout="column" layout-padding ng-init="isLoading=true; dtl.Select({'pago':'SI'},'zapato','id', 'ASC','9999');dtl.Select('no','locales','nombre', 'ASC', '100')">
+    <md-content layout="column" layout-padding ng-init="isLoading=true; dtl.Select({'pago':'SI'},'zapato','id', 'ASC','9999');dtl.Select('no','locales','nombre', 'ASC', '100');quecosa='SI';">
         <section>
             
             <h1>RESUMEN DE VENTAS {{dtl.localogin | uppercase}}</h1>
+            <md-button ng-show="quecosa=='SI'" ng-click="dtl.Select({'pago':'Vendido'},'zapato','id', 'ASC','9999');quecosa='Vendido'"> MOSTRAR VENDIDOS</md-button>
+            <md-button ng-show="quecosa=='Vendido'" ng-click="dtl.Select({'pago':'SI'},'zapato','id', 'ASC','9999');quecosa='SI'"> VOLVER A PAGOS</md-button>
             <table style="width:100%;">
                 <tr>
-                    <th>Vendidos</th>
+                    <th>PAGOS:{{quecosa}}</th>
                     <th>Unidades</th>
                     <th>Ventas</th>
                     <th>Ganancia</th>
@@ -29,25 +31,25 @@ table tr:nth-child(even) {
                     <td>${{dtl.sumar(dtl.zapatos,'precio_final')}}</td>
                     <td>${{dtl.sumar(dtl.zapatos,'comision')}}</td>
                 </tr>
-                <tr ng-init="dtl.selectBetween({'pago':'SI'},'semana','id', 'ASC','9999');">
+                <tr ng-init="dtl.selectBetween({'pago':quecosa},'semana','id', 'ASC','9999');">
                     <td> Esta semana </td>
                     <td>{{dtl.semanaL}}</td>
                     <td>${{dtl.sumar(dtl.semana,'precio_final')}}</td>
                     <td>${{dtl.sumar(dtl.semana,'comision')}}</td>
                 </tr>
-                <tr ng-init="dtl.selectBetween({'pago':'SI'},'mes','id', 'ASC','9999');">
+                <tr ng-init="dtl.selectBetween({'pago':quecosa},'mes','id', 'ASC','9999');">
                     <td> En {{esteMes}}</td>
                     <td>{{dtl.mesL}}</td>
                     <td>${{dtl.sumar(dtl.mes,'precio_final')}}</td>
                     <td>${{dtl.sumar(dtl.mes,'comision')}}</td>
                 </tr>
-                <tr ng-init="dtl.selectBetween({'pago':'SI'},'mesAnterior','id', 'ASC','9999');">
+                <tr ng-init="dtl.selectBetween({'pago':quecosa},'mesAnterior','id', 'ASC','9999');">
                     <td> En {{esteMesAnterior}}</td>
                     <td>{{dtl.mesAnteriorL}}</td>
                     <td>${{dtl.sumar(dtl.mesAnterior,'precio_final')}}</td>
                     <td>${{dtl.sumar(dtl.mesAnterior,'comision')}}</td>
                 </tr>
-                <tr ng-init="dtl.selectBetween({'pago':'SI'},'anio','id', 'ASC','9999');">
+                <tr ng-init="dtl.selectBetween({'pago':quecosa},'anio','id', 'ASC','9999');">
                     <td> En 2018 </td>
                     <td>{{dtl.anioL}}</td>
                     <td>${{dtl.sumar(dtl.anio,'precio_final')}}</td>
@@ -55,8 +57,8 @@ table tr:nth-child(even) {
                 </tr>
             </table>
         </section>
-        <section ng-init="dtl.Stock({'pago':'SI'},'zapato','id', 'ASC', '9999');">
-            <h1>MODELOS Y TALLES VENDIDOS</h1>
+        <section ng-init="dtl.Stock({'pago':quecosa},'zapato','id', 'ASC', '9999');">
+            <h1>MODELOS Y TALLES PAGO: "{{quecosa | uppercase}}"</h1>
         <div style="width:100%; text-align: center;" >
             <div layout="row">
                 <div style="width:11%; border:1px black solid;">MODELO</div>

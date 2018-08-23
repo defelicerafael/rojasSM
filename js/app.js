@@ -47,6 +47,8 @@
         
         dtl.id_remito = $routeParams.id_remito;
         
+        $scope.quecosa = false;
+        
         dtl.item = {};
        // console.log($scope.fechaCompra.getTime());
         
@@ -68,12 +70,16 @@
             }
         });
         
-     /*$scope.$watch(dtl.localogin,function(newValue,oldValue) {
+     $scope.$watch('quecosa',function(newValue,oldValue) {
             if(newValue!==oldValue){
-            
-            dtl.showSimpleToast("ACTUALIZANDO...");
+            dtl.selectBetween({'pago':newValue},'semana','id', 'ASC','9999');
+            dtl.selectBetween({'pago':newValue},'mes','id', 'ASC','9999');
+            dtl.selectBetween({'pago':newValue},'mesAnterior','id', 'ASC','9999');
+            dtl.selectBetween({'pago':newValue},'anio','id', 'ASC','9999');
+            dtl.Stock({'pago':newValue},'zapato','id', 'ASC', '9999');
             }
-        });  */
+        });  
+        
             
             
         dtl.showSimpleToast = function(text) {
@@ -531,6 +537,21 @@
             var r = confirm("Esta seguro que desea ELIMINAR este dato?");
             if(r===true){
             var link = 'server/delete.php';
+            var id = id;
+            SqlDelete.async(link,id,tabla).then(function(d){
+            //console.log(d);
+            dtl.showSimpleToast("Ha BORRADO un dato.");
+            $scope.isLoading=true;
+            $route.reload();
+            });
+            }
+            
+        };
+        $scope.DeleteId = function (id,tabla){
+           // console.log(id,tabla);
+            var r = confirm("Esta seguro que desea ELIMINAR este dato?");
+            if(r===true){
+            var link = 'server/deleteId.php';
             var id = id;
             SqlDelete.async(link,id,tabla).then(function(d){
             //console.log(d);

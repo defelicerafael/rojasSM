@@ -88,6 +88,7 @@ table tr:nth-child(even) {
                 <th>COLOR</th>
                 <th>TALLE</th>
                 <th>REMITO</th>
+                <th></th>
                 <!-- <th>FECHA COMPRA</th>-->
                 <!--<th>LOCAL</th>-->
                 <!--   <th>ASIGNAR</th>-->
@@ -108,7 +109,11 @@ table tr:nth-child(even) {
                     <md-option ng-value="m.nombre" ng-repeat="m in dtl.locales  track by $index" >{{m.nombre}}</md-option>
                 </md-select>
               </td>-->
-            </tr>
+            <td>
+                <md-button class="md-secondary md-icon-button" ng-click="DeleteId(x.id,'zapato');" aria-label="delete" style="background-color:red">
+                    <md-icon md-svg-icon="img/icon/ic_delete_white_24px.svg"></md-icon>
+                </md-button>
+            </td>
         </table>
         <md-divider ></md-divider>
     </section>  

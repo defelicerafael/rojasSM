@@ -77,7 +77,7 @@
                         </div>
                         
                         <div>
-                            <img src="img/icon/baseline-archive-24px.png" alt="bajar a excel" style="width: 30px; height: auto; cursor: pointer;"  ng-click="dtl.Excel({'local':d.nombre,'pago':dtl.filtro},'zapato','id','ASC','9999');"/>
+                            <img src="img/icon/baseline-archive-24px.png" alt="bajar a excel" style="width: 30px; height: auto; cursor: pointer;"  ng-click="Excel();"/>
                         </div>    
                             
                     </div>
@@ -125,7 +125,7 @@
                     <td ng-show="mostrar['comision']">${{sumar(filtered,'comision')}}</td>
                     
                 </tr>
-                <tr ng-repeat="td in tablajson | orderBy:d.nombre | filter :{'local':localesF,'pago':pagosF,'modelo':modelosF,'talle':tallesF,'color':coloresF,'id':idF} | filter:query as filtered track by $index">
+                <tr ng-repeat="td in tablajson | orderBy:td.id | filter :{'local':localesF,'pago':pagosF,'modelo':modelosF,'talle':tallesF,'color':coloresF,'id':idF} | filter:query as filtered track by $index">
                     <td ng-show="mostrar['id']">{{td.id}}</td>  
                     <td ng-show="mostrar['modelo']">{{td.modelo}}</td>
                     <td ng-show="mostrar['color']">{{td.color}}</td>

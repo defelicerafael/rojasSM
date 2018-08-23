@@ -9,7 +9,7 @@
                 $scope.datosSecciones = [];
                 $scope.DatosSecciones = function (){
                     //console.log("entre a DatosSecciones");
-                    $scope.isLoading = true;
+                    $scope.isLoadingHeader = true;
                     var filtro = 'no';
                     var link = 'server/columnasSecciones.php';
                     var tabla = 'secciones';
@@ -19,7 +19,7 @@
                     Sql.async(filtro,link,tabla,filtro_por,orden,limit).then(function(d) {
                     $scope.datosSecciones = d;
                     //console.log($scope.datosSecciones);
-                    $scope.isLoading = false;
+                    $scope.isLoadingHeader = false;
                     });
                 }; 
                 $scope.logout = function(){
