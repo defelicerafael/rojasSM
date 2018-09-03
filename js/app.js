@@ -9,6 +9,7 @@
         dtl.modelo = null;
         dtl.color = null;
         dtl.talle = null;
+        dtl.local = null;
         dtl.proveedor = null;
         dtl.fechaCompra = new Date();;
         dtl.modelos = [];
@@ -32,7 +33,30 @@
         dtl.semana = [];
         dtl.anio = [];
         dtl.mes = [];
-        dtl.mesAnterior = [];
+        dtl.mesAnterior = "";
+        dtl.semanaL = "";
+        dtl.anioL = "";
+        dtl.mesL = "";
+        dtl.mesAnteriorL = [];
+        dtl.semanaRL = [];
+        dtl.anioRL = [];
+        dtl.mesRL = [];
+        dtl.mesAnteriorRL = "";
+        dtl.semanaRLL = "";
+        dtl.anioRLL = "";
+        dtl.mesRLL = "";
+        dtl.mesAnteriorRLL = [];
+        dtl.semanaV = [];
+        dtl.anioV = [];
+        dtl.mesV = [];
+        dtl.mesAnteriorV = [];
+        dtl.semanaVL = "";
+        dtl.anioVL = "";
+        dtl.mesVL = "";
+        dtl.mesAnteriorVL = "";
+        
+        dtl.zapatosRL = [];
+        dtl.zapatosRLL = "";
         
         $scope.fechaCompra = new Date();
         $scope.fechaCompra.getTime();
@@ -44,10 +68,13 @@
         $scope.meses = new Date();
         $scope.esteMes = $scope.mesLetras[$scope.meses.getMonth()];
         $scope.esteMesAnterior = $scope.mesLetras[$scope.meses.getMonth()-1];
+        $scope.anio = $scope.meses.getFullYear();
+        
         
         dtl.id_remito = $routeParams.id_remito;
         
-        $scope.quecosa = false;
+        $scope.quecosa = 'SI';
+        $scope.quecosaL = 'SI';
         
         dtl.item = {};
        // console.log($scope.fechaCompra.getTime());
@@ -70,17 +97,55 @@
             }
         });
         
-     $scope.$watch('quecosa',function(newValue,oldValue) {
+        $scope.$watch('quecosa',function(newValue,oldValue) {
+           // console.log(newValue,oldValue,dtl.local);
             if(newValue!==oldValue){
-            dtl.selectBetween({'pago':newValue},'semana','id', 'ASC','9999');
-            dtl.selectBetween({'pago':newValue},'mes','id', 'ASC','9999');
-            dtl.selectBetween({'pago':newValue},'mesAnterior','id', 'ASC','9999');
-            dtl.selectBetween({'pago':newValue},'anio','id', 'ASC','9999');
-            dtl.Stock({'pago':newValue},'zapato','id', 'ASC', '9999');
+                if(dtl.local===null){
+                    
+                 //   console.log(dtl.local,newValue);
+                    dtl.Select({'pago':newValue},'zapato','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue},'semana','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue},'mes','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue},'mesAnterior','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue},'anio','id', 'ASC','9999');
+                    dtl.Stock({'pago':newValue},'zapato','id', 'ASC', '9999');
+                }else{
+               //     console.log(dtl.local,newValue);
+                    dtl.Select({'pago':newValue,'local':dtl.local},'zapato','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue,'local':dtl.local},'semana','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue,'local':dtl.local},'mes','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue,'local':dtl.local},'mesAnterior','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue,'local':dtl.local},'anio','id', 'ASC','9999');
+                    dtl.Stock({'pago':newValue,'local':$scope.local},'zapato','id', 'ASC', '9999');   
+                }
+            }
+        });
+        
+        $scope.$watch('quecosaL',function(newValue,oldValue) {
+           // console.log(newValue,oldValue,dtl.local);
+            if(newValue!==oldValue){
+                    dtl.Select({'pago':newValue,'local':dtl.localogin},'zapato','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue,'local':dtl.localogin},'semana','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue,'local':dtl.localogin},'mes','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue,'local':dtl.localogin},'mesAnterior','id', 'ASC','9999');
+                    dtl.selectBetween({'pago':newValue,'local':dtl.localogin},'anio','id', 'ASC','9999');
+                    dtl.Stock({'pago':newValue,'local':dtl.localogin},'zapato','id', 'ASC', '9999');
+                }
+            
+        });
+        
+        
+        
+        $scope.$watch('dtl.local',function(newValue,oldValue) {
+            if(newValue!==oldValue){
+            console.log($scope.quecosa,newValue);    
+            dtl.selectBetween({'pago':$scope.quecosa,'local':newValue},'semana','id', 'ASC','9999');
+            dtl.selectBetween({'pago':$scope.quecosa,'local':newValue},'mes','id', 'ASC','9999');
+            dtl.selectBetween({'pago':$scope.quecosa,'local':newValue},'mesAnterior','id', 'ASC','9999');
+            dtl.selectBetween({'pago':$scope.quecosa,'local':newValue},'anio','id', 'ASC','9999');
+            dtl.Stock({'pago':$scope.quecosa,'local':newValue},'zapato','id', 'ASC', '9999');
             }
         });  
-        
-            
             
         dtl.showSimpleToast = function(text) {
             $mdToast.show(
@@ -231,6 +296,51 @@
                 }
                 });
             };
+        
+        
+        dtl.vacio = function(algo){
+          if(algo===""){
+              ;
+          }else{
+              return algo;
+          }  
+        };
+        
+        
+        dtl.solicitar = function(selected){
+            $scope.pidiendo = true;
+            $scope.showAlert = function(texto) {
+            $mdDialog.show(
+                  $mdDialog.alert()
+                    .parent(angular.element(document.querySelector('#popupContainer')))
+                    .clickOutsideToClose(true)
+                    .title('Pedido:')
+                    .textContent(texto)
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('Enterada!')
+                    
+                );
+              };
+            
+         //console.log(selected,dtl.localogin);
+           $http({method: 'POST', url: 'server/email_pedido.php', data: {local:dtl.localogin,zapato:selected}}).
+                then(function(response) {
+                  $scope.status = response.status;
+                  $scope.data = response.data;
+                  $scope.pidiendo = false;
+                  console.log($scope.data);
+                  $scope.showAlert($scope.data);
+                  window.history.back(0);
+                }, function(response) {
+                $scope.data = response.data || 'Request failed';
+              //console.log($scope.data);  
+              $scope.status = response.status;
+              $scope.pidiendo = false;
+              $scope.showAlert($scope.status);
+              window.history.back(0);
+            });
+        };    
+            
             
         dtl.insert = function (datos,tabla){
            // console.log(datos,tabla);
@@ -247,8 +357,65 @@
             });
         };
         
+        
+        dtl.resumenLocal = function(local,fecha){
+            $scope.haciendoCuentas = true;
+            var datos = local;
+            var link = 'server/vendidoPago.php';  
+            var tabla = fecha;
+            SqlInsertArray.async(link,datos,tabla).then(function(d){
+            console.log(d);
+                
+            if(tabla==='todo'){
+                dtl.zapatosRL = d;
+                dtl.zapatosRLL = dtl.zapatosRL.length; 
+                console.log(dtl.zapatosRLL);
+            }
+             
+            dtl.sumar(dtl.zapatos,'precio_de_venta');
+            if(tabla==='semana'){
+                    dtl.semanaRL = d;
+                    if(dtl.semanaRL==='0'){
+                        dtl.semanaRLL = 0;    
+                        }else{
+                     dtl.semanaRLL = dtl.semanaRL.length;  
+                    }
+              //  console.log("semana:"+dtl.semana);
+                }
+                if(tabla==='anio'){
+                    dtl.anioRL = d;
+                    if(dtl.anioRL==='0'){
+                        dtl.anioRLL = '0';    
+                        }else{
+                     dtl.anioRLL = dtl.anioRL.length;  
+                    }
+              //   console.log("anio:"+dtl.anio);
+                }
+                 if(tabla==='mes'){
+                    dtl.mesRL = d;
+                    if(dtl.mesRL==='0'){
+                        dtl.mesRLL = '0';    
+                        }else{
+                     dtl.mesRLL = dtl.mesRL.length;  
+                    }
+             //    console.log("mes:"+dtl.mes);
+                }
+                 if(tabla==='mesAnterior'){
+                    dtl.mesAnteriorRL = d;
+                    if(dtl.mesAnteriorRL==='0'){
+                        dtl.mesAnteriorRLL = '0';    
+                        }else{
+                     dtl.mesAnteriorRLL = dtl.mesAnteriorRL.length;  
+                    }
+                   // console.log("mesAnterior: "+dtl.mesAnterior);
+                }
+            
+            $scope.haciendoCuentas = false;
+            });
+        };
+        
+        
         dtl.insertTabla = function (datos,tabla){
-           // console.log(datos,tabla);
             var datos = datos;
             var link = 'server/insert_array_datos_normal.php';  
             var tabla = tabla;
@@ -427,10 +594,10 @@
             var contar = 0;
             angular.forEach(array, function(value, key) {
                 angular.forEach(value, function(value2, key2) {
-                    //console.log(value2,key2);
+                    console.log(value2,key2);
                     if(key2===columna){
                         contar += parseInt(value2);
-                       // console.log(contar);
+                    console.log(contar);
                     }
                 });
             });
@@ -459,8 +626,8 @@
                 }
                 if(tabla==='anio'){
                     dtl.anio = d;
-                    if(dtl.anio===0){
-                        dtl.anio = 0;    
+                    if(dtl.anio==='0'){
+                        dtl.anioL = '0';    
                         }else{
                      dtl.anioL = dtl.anio.length;  
                     }
@@ -468,8 +635,8 @@
                 }
                  if(tabla==='mes'){
                     dtl.mes = d;
-                    if(dtl.mes===0){
-                        dtl.mes = 0;    
+                    if(dtl.mes==='0'){
+                        dtl.mesL = '0';    
                         }else{
                      dtl.mesL = dtl.mes.length;  
                     }
@@ -477,12 +644,64 @@
                 }
                  if(tabla==='mesAnterior'){
                     dtl.mesAnterior = d;
-                    if(dtl.mesAnterior===0){
-                        dtl.mesAnterior = 0;    
+                    if(dtl.mesAnterior==='0'){
+                        dtl.mesAnteriorL = '0';    
                         }else{
                      dtl.mesAnteriorL = dtl.mesAnterior.length;  
                     }
-               // console.log("mesAnterior:"+dtl.mesAnterior);
+                   // console.log("mesAnterior: "+dtl.mesAnterior);
+                }
+            });
+            
+        };
+        
+        
+        dtl.selectBetweenVendido =  function(filtro,tabla,filtro_por, orden, limit){
+            // la tabla es la fecha semana, mes, anio
+            var filtro = filtro;
+            var link = 'server/resumen.php';
+            var tabla = tabla;
+            var filtro_por = filtro_por;
+            var orden = orden;
+            var limit = limit;
+            Sql.async(filtro,link,tabla,filtro_por,orden,limit).then(function(d) {
+            dtl.resumen = d;
+           //console.log(dtl.resumen);
+                if(tabla==='semana'){
+                    dtl.semanaV = d;
+                    if(dtl.semanaV==='0'){
+                        dtl.semanaVL = 0;    
+                        }else{
+                     dtl.semanaVL = dtl.semanaV.length;  
+                    }
+              //  console.log("semana:"+dtl.semana);
+                }
+                if(tabla==='anio'){
+                    dtl.anioV = d;
+                    if(dtl.anioV==='0'){
+                        dtl.anioVL = '0';    
+                        }else{
+                     dtl.anioVL = dtl.anioV.length;  
+                    }
+              //   console.log("anio:"+dtl.anio);
+                }
+                 if(tabla==='mes'){
+                    dtl.mesV = d;
+                    if(dtl.mesV==='0'){
+                        dtl.mesVL = '0';    
+                        }else{
+                     dtl.mesVL = dtl.mesV.length;  
+                    }
+             //    console.log("mes:"+dtl.mes);
+                }
+                 if(tabla==='mesAnterior'){
+                    dtl.mesAnteriorV = d;
+                    if(dtl.mesAnteriorV==='0'){
+                        dtl.mesAnteriorVL = '0';    
+                        }else{
+                     dtl.mesAnteriorVL = dtl.mesAnteriorV.length;  
+                    }
+                   // console.log("mesAnterior: "+dtl.mesAnterior);
                 }
             });
             
@@ -613,7 +832,9 @@
             dtl.asigLocal = d;
             //console.log(d);    
                 angular.forEach(array, function(value, key) {
-                    dtl.Edit({'local':local,'descuentos':dtl.asigLocal[0].comision},tabla,value.id,6);
+                    
+                var precio_final=value.precio_de_venta*dtl.asigLocal[0].comision/100;
+                    dtl.Edit({'local':local,'descuentos':dtl.asigLocal[0].comision,'comision':precio_final},tabla,value.id,6);
                     dtl.Select({'local':local},'zapato','id', 'ASC', '999');
                 });
             });
@@ -630,13 +851,19 @@
             if(typeof modelo !=='undefined'){
                 angular.forEach(array, function(value, key) {
                     dtl.Edit({'modelo':modelo},tabla,value.id,0);
+                    dtl.Select({'remito':dtl.id_remito},'zapato','id', 'ASC', '999');
+                    
                 });
             }
             if(typeof color !=='undefined'){
                 angular.forEach(array, function(value, key) {
                     dtl.Edit({'color':color},tabla,value.id,0);
+                    dtl.Select({'remito':dtl.id_remito},'zapato','id', 'ASC', '999');
                 });
             };
+            return $timeout(function() {
+                dtl.Select({'remito':dtl.id_remito},'zapato','id', 'ASC', '999');
+            },2000);
         };    
         
         

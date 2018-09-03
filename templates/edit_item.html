@@ -41,28 +41,28 @@
                 </md-input-container>
                 <md-input-container class="md-block" ng-if="dtl.id_tabla=='descuentos'">
                     <label>Porcentaje</label>
-                    <input required name="porcentaje" ng-model="dtl.datos[0].porcentaje" type='number'>
+                    <input required name="porcentaje" ng-model="dtl.datos[0].porcentaje" type='text'>
                     <div ng-messages="projectForm.porcentaje.$error">
                       <div ng-message="required">Le solicito por favor el porcentaje</div>
                     </div>
                 </md-input-container>
                 <md-input-container class="md-block" ng-if="dtl.id_tabla=='locales'">
                     <label>Comision</label>
-                    <input required name="comision" ng-model="dtl.datos[0].comision" type='number'>
+                    <input required name="comision" ng-model="dtl.datos[0].comision" type='text'>
                     <div ng-messages="projectForm.comision.$error">
                       <div ng-message="required">Le solicito por la comision</div>
                     </div>
                 </md-input-container>
                 <md-input-container class="md-block" ng-if="dtl.id_tabla=='talles'">
                     <label>Numero</label>
-                    <input required name="numero" ng-model="dtl.datos[0].numero" type='number'>
+                    <input required name="numero" ng-model="dtl.datos[0].numero" type='text'>
                     <div ng-messages="projectForm.numero.$error">
                       <div ng-message="required">Le solicito por el numero de talle</div>
                     </div>
                 </md-input-container>
                 <md-input-container class="md-block" ng-if="dtl.id_tabla=='locales'">
                     <label>Ubicacion</label>
-                    <input required name="ubicacion" ng-model="dtl.datos[0].ubicacion" type='number'>
+                    <input required name="ubicacion" ng-model="dtl.datos[0].ubicacion" type='text'>
                     <div ng-messages="projectForm.ubicacion.$error">
                       <div ng-message="required">Le solicito por el numero de ubicacion</div>
                     </div>

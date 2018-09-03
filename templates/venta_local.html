@@ -72,7 +72,7 @@ table tr:nth-child(even) {
                                 <th>Fecha</th>
                               <!--  <th>Enviado</th>-->
                               <!--  <th>Canal</th>-->
-                                <th>Fact.</th>
+                             <!--   <th>Fact.</th>-->
                                 <th>Comisi&oacute;n</th>
                                 <th>Grabar</th>
                                
@@ -106,10 +106,11 @@ table tr:nth-child(even) {
                                         <option ng-repeat="m in dtl.canales track by $index" ng-value="{{z.canales}}">{{m.nombre}}</option>
                                     </select>
                                 </td>-->
-                                <td>
+                             <!--   <td>
                                     {{dtl.log}}
-                                </td>
-                                <td ng-init="z.precio_final=z.precio_de_venta*z.descuentos/100"><input  ng-model="z.precio_final" value="{{z.precio_final}}" maxlength="10" size="10"/></td>
+                                </td>-->
+                                <td ng-show="z.comision">{{z.comision}}</td>
+                                <td ng-show="!z.comision" ng-init="z.precio_final=z.precio_de_venta*z.descuentos/100; dtl.Edit({'comision':z.precio_final},'zapato',z.id,'0')">{{z.precio_final}}</td>
                                 <td ng-click="dtl.Edit({'local':z.local,'medios_de_pago':z.medios_de_pago,'pago':z.pago,'fecha_de_venta':fechaCompra2,'precio_de_venta':z.precio_de_venta,'enviado':z.enviado,'canales':z.canales,'facturadora':z.facturadora,'precio_final':z.precio_final,'comision':z.precio_final},'zapato',z.id,'5')"><img src="img/icon/baseline-save-24px.svg" alt="archivar" style="cursor: pointer;"/></td>
                             </tr>
                         </table>

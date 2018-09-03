@@ -64,23 +64,28 @@ table tr:nth-child(even) {
                         
                         <md-progress-linear class="md-accent md-hue-1" md-mode="indeterminate" ng-if="isLoading" style="color:black;"></md-progress-linear>
                         <table style="width: 100%; text-align: center; border:1px gray solid;">
+                            <thead style="width:100%;">
                             <tr>
                                 <th>Id</th>
                                 <th>Modelo</th>
                                 <th>Color</th>
                                 <th>Talle</th>
                                 <th>Modo de pago</th>
-                                <th>Pago</th>
+                              <!--  <th>Pago</th>-->
                                 <th>Precio</th>
                                 <th>Fecha</th>
                                 <th>Enviado</th>
                                 <th>Canal</th>
                                 <th>Fact.</th>
                                 <th>$ final.</th>
+                                <th>%</th>
                                 <th>Comentarios</th>
+                                <th>Pago</th>
                                 <th>Grabar</th>
                                
                             </tr>
+                            </thead>
+                            <tbody>
                             <tr ng-repeat="z in dtl.zapatos | orderBy:d.nombre | filter :{'local':d.nombre,'pago':dtl.filtro,'modelo':modelos,'talle':talles,'color':colores,'id':id} track by $index" ng-show="!isLoading">
                                 <td>{{z.id}}</td>
                                 <td>{{z.modelo}}</td>
@@ -89,38 +94,52 @@ table tr:nth-child(even) {
                                 <td>
                                     
                                     <select ng-model="z.medios_de_pago" name="medios_de_pago" form="ventas">
+                                        <option></option>
                                         <option ng-repeat="m in dtl.medios_de_pago track by $index" ng-model="z.medios_de_pago" ng-value="{{z.medios_de_pago}}">{{m.nombre}}</option>
                                     </select>
                                 </td>
-                                <td>
+                              <!--  <td>
                                     <select ng-model="z.pago" name="pago" form="ventas">
+                                        <option></option>
                                         <option ng-repeat="m in dtl.pago track by $index" ng-value="{{z.pago}}">{{m.nombre}}</option>
                                     </select>
-                                </td>
-                                <td><input  ng-model="z.precio_de_venta" maxlength="10" size="10" /></td>
-                                <td><input  ng-model="z.fecha_de_venta" maxlength="10" size="10" /></td>
+                                </td>-->
+                                <td><input  ng-model="z.precio_de_venta" maxlength="10" size="5" /></td>
+                                <td><input  ng-model="z.fecha_de_venta" maxlength="10" size="5" /></td>
                                 <td>
                                     <select ng-model="z.enviado" name="enviado" form="ventas">
+                                        <option></option>
                                         <option ng-repeat="m in dtl.enviado track by $index" ng-value="{{z.enviado}}">{{m.nombre}}</option>
                                     </select>
                                 </td>
                                 <td>
                                     <select ng-model="z.canales" name="canales" form="ventas">
+                                        <option></option>
                                         <option ng-repeat="m in dtl.canales track by $index" ng-value="{{z.canales}}">{{m.nombre}}</option>
                                     </select>
                                 </td>
                                 <td>
                                     <select ng-model="z.facturadora" name="facturadora" form="ventas" >
+                                        <option></option>
                                         <option ng-repeat="m in dtl.facturadora track by $index" ng-value="{{z.facturadora}}">{{m.nombre}}</option>
                                     </select>
                                 </td>
-                                <td><input  ng-model="z.precio_final" value="{{z.precio_final}}" maxlength="10" size="10"/></td>
+                                <td><input  ng-model="z.precio_final" value="{{z.precio_final}}" maxlength="10" size="5"/></td>
+                                <td>
+                                    <input  ng-model="z.comision" maxlength="10" size="5" />
+                                </td>
                                 <td>
                                     <input  ng-model="z.comentarios" maxlength="250" size="10" />
                                 </td>
-                                <td ng-click="dtl.Edit({'local':z.local,'medios_de_pago':z.medios_de_pago,'pago':z.pago,'fecha_de_venta':z.fecha_de_venta,'precio_de_venta':z.precio_de_venta,'enviado':z.enviado,'canales':z.canales,'facturadora':z.facturadora,'precio_final':z.precio_final,'comentarios':z.comentarios},'zapato',z.id,'5')"><img src="img/icon/baseline-save-24px.svg" alt="archivar" style="cursor: pointer;"/></td>
+                                <td>
+                                    <select ng-model="z.pago" name="pago" form="ventas">
+                                        <option></option>
+                                        <option ng-repeat="m in dtl.pago track by $index" ng-value="{{z.pago}}">{{m.nombre}}</option>
+                                    </select>
+                                </td>
+                                <td ng-click="dtl.Edit({'local':z.local,'medios_de_pago':z.medios_de_pago,'pago':z.pago,'fecha_de_venta':z.fecha_de_venta,'precio_de_venta':z.precio_de_venta,'enviado':z.enviado,'canales':z.canales,'facturadora':z.facturadora,'precio_final':z.precio_final,'comision':z.comision,'comentarios':z.comentarios},'zapato',z.id,'5')"><img src="img/icon/baseline-save-24px.svg" alt="archivar" style="cursor: pointer;"/></td>
                             </tr>
-                            
+                            </tbody>
                         </table>
                         
                     </div>

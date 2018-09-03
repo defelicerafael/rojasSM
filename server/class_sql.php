@@ -133,6 +133,29 @@ class Sql
             
       return $this->select;  
     }
+   
+    public function selectVendidoPagoPorLocal($local,$desde,$hasta){
+        $this->connect();
+                    //SELECT * FROM `zapato` WHERE `local` =  'Vicky_Parejas' AND  `pago` NOT LIKE  'NO'
+            $sql = "SELECT * FROM zapato WHERE (fecha_de_venta BETWEEN '$desde' AND '$hasta') AND local = '$local' AND pago NOT LIKE 'NO'";
+            
+       // echo $sql;    
+        $result = $this->connection->query($sql);
+        $columnas = $this->showColumnNames('zapato');
+        //$rows = $result->num_rows;
+            
+            while($row = $result->fetch_assoc()) {
+                for($i=0;$i<count($columnas);$i++){
+                    $dato = $columnas[$i];
+                    $array[$dato] = $row[$dato];
+                  
+                }
+                $this->select[] = $array;
+            }
+            
+      return $this->select;  
+    }
+    
     
     public function selectTablaOr($tabla,$filtro,$filtro_por,$orden,$limit){
         $this->connect();
@@ -242,7 +265,7 @@ class Sql
         
         $this->setHoy();
         $this->setMeses($m);
-        $mes = $this->getMeses();
+        
         //echo "mes: $mes";
         $this->connect();
             if($filtro==="no"){

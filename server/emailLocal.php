@@ -30,7 +30,7 @@ $emailLocal = $selectEmail[0][email];
 // Datos de la cuenta de correo utilizada para enviar vía SMTP
 $smtpHost = "c1320252.ferozo.com";  // Dominio alternativo brindado en el email de alta 
 $smtpUsuario = "stock@rojasshoemakers.com.ar";  // Mi cuenta de correo
-$smtpClave = "Rsm4k3rs";  // Mi contraseña
+$smtpClave = "cvtz@wli0Xnoqlm";  // Mi contraseña
 
 // Email donde se enviaran los datos cargados en el formulario de contacto
 $emailDestino = $emailLocal;
@@ -38,7 +38,7 @@ $emailMili = "stock@rojasshoemakers.com.ar";
 //$emailJuli = "stock@rojasshoemakers.com.ar";
 
 $cuerpo = "Hola Chicas, <br/>";
-$cuerpo .= "Se les ha asignado el zapato con: $id <br/>";
+$cuerpo .= "Se han pedido el zapato con: $id <br/>";
 $cuerpo .= "El zapato tiene estas caracteristicas:<br/>";
 $cuerpo .= "Modelo: <b>$array[modelo]</b> <br/>";
 $cuerpo .= "Color: <b>$array[color] </b><br/>";

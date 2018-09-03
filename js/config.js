@@ -84,6 +84,11 @@
                     controller:"Ctrl",
                     controllerAs : "dtl"
                 })
+                .when("/Milocal/pedidos/",{
+                    templateUrl:"templates/pedidos_local.html",
+                    controller:"Ctrl",
+                    controllerAs : "dtl"
+                })
                
                 
                 

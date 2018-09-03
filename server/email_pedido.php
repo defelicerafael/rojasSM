@@ -6,16 +6,20 @@
 require("class.phpmailer.php");
 require("class.smtp.php");
 
+
 // Valores enviados desde el formulario
-
 $objDatos = json_decode(file_get_contents("php://input"));
+$local = $objDatos->local;
+$zapato = $objDatos->zapato;
+$arrayzapatos = json_decode(json_encode($zapato), True);
+$cuantos = count($arrayzapatos);
+//echo $cuantos;
 
-$tabla = $objDatos->tabla;
-$datos = $objDatos->datos;
-$id = $objDatos->id;
-$where = $objDatos->where;
+//print_r($arrayzapatos);
 
-$array = json_decode(json_encode($datos), True);
+//$id = "141";
+//echo $id;
+
 
 
 
@@ -25,24 +29,37 @@ $smtpUsuario = "stock@rojasshoemakers.com.ar";  // Mi cuenta de correo
 $smtpClave = "cvtz@wli0Xnoqlm";  // Mi contraseña
 
 // Email donde se enviaran los datos cargados en el formulario de contacto
-$emailDestino = "stock@rojasshoemakers.com.ar";
-$emailMili = "stock@rojasshoemakers.com.ar";
-$emailJuli = "stock@rojasshoemakers.com.ar";
+$emailDestino = "defelicerafael@gmail.com";
+//$emailMili = "stock@rojasshoemakers.com.ar";
+//$emailJuli = "stock@rojasshoemakers.com.ar";
 
-$cuerpo = "Hola Chicas, <br/>";
-$cuerpo .= "La facturadora $array[facturadora], ha modificado el zapato con id: $id <br/>";
-$cuerpo .= "Los datos han quedado de esta manera:<br/>";
-$cuerpo .= "Enviado: <b>$array[enviado]</b> <br/>";
-$cuerpo .= "Pago: <b>$array[pago] </b><br/>";
-$cuerpo .= "Precio de venta:<b> $array[precio_de_venta]</b> <br/>";
-$cuerpo .= "Precio final: <b>$array[precio_final] </b><br/>";
-$cuerpo .= "Medio de pago: <b>$array[medios_de_pago]</b> <br/>";
-$cuerpo .= "Fecha de venta:<b> $array[fecha_de_venta]</b> <br/>";
-$cuerpo .= "Canales: <b>$array[canales]</b> <br/>";
+$cuerpo = "";
+
+for($i=0;$i<$cuantos;$i++){
+$cuerpo .= "Hola Chicas, <br/>";
+   
+    foreach ($arrayzapatos[$i] as $key => $value) {
+        if($key==='id'){
+            $cuerpo .= "El local $local, ha solicitado el zapato id: $value <br/>";     
+        }
+        if($key==='modelo'){
+            $cuerpo .= "Modelo: <b>$value</b> <br/>";
+        }
+        if($key==='color'){
+            $cuerpo .= "Color: <b>$value</b><br/>";
+        }
+        if($key==='talle'){
+            $cuerpo .= "Talle:<b> $value</b> <br/>";
+        }
+     }
+$cuerpo .= "<hr>";
+}
 
 
-$mail = new PHPMailer();
+
+$mail = new PHPMailer(true);
 $mail->IsSMTP();
+//$mail->SMTPDebug = 2;
 $mail->SMTPAuth = true;
 $mail->Port = 587; 
 $mail->IsHTML(true); 
@@ -57,8 +74,8 @@ $mail->FromName = $nombre;
 $mail->AddAddress($emailDestino); 
 //$mail->AddAddress($emailMili);
 //$mail->AddAddress($emailJuli);// Esta es la dirección a donde enviamos los datos del formulario
-$mail->AddReplyTo($email); // Esto es para que al recibir el correo y poner Responder, lo haga a la cuenta del visitante. 
-$mail->Subject = "RojasShoeMakers Stock - Cambio en $array[local], zapato id: $id"; // Este es el titulo del email.
+$mail->AddReplyTo("stock@rojasshoemakers.com.ar"); // Esto es para que al recibir el correo y poner Responder, lo haga a la cuenta del visitante. 
+$mail->Subject = "RojasShoeMakers Stock - $local - Solicito $cuantos zapato/s"; // Este es el titulo del email.
 $mensajeHtml = nl2br($cuerpo);
 $mail->Body = "{$mensajeHtml}"; // Texto del email en formato HTML
 $mail->AltBody = "{$mensaje}"; // Texto sin formato HTML

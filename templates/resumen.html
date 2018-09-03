@@ -15,9 +15,21 @@ table tr:nth-child(even) {
     <md-content layout="column" layout-padding ng-init="isLoading=true; dtl.Select({'pago':'SI'},'zapato','id', 'ASC','9999');dtl.Select('no','locales','nombre', 'ASC', '100');quecosa='SI';">
         <section>
             
-            <h1>RESUMEN DE VENTAS {{dtl.localogin | uppercase}}</h1>
-            <md-button ng-show="quecosa=='SI'" ng-click="dtl.Select({'pago':'Vendido'},'zapato','id', 'ASC','9999');quecosa='Vendido'"> MOSTRAR VENDIDOS</md-button>
-            <md-button ng-show="quecosa=='Vendido'" ng-click="dtl.Select({'pago':'SI'},'zapato','id', 'ASC','9999');quecosa='SI'"> VOLVER A PAGOS</md-button>
+            <h1>RESUMEN DE VENTAS {{dtl.localogin | uppercase}} | {{dtl.local | uppercase}}</h1>
+            <div layout="column" layout-align="start start">
+                <div>
+                    <md-radio-group ng-model="quecosa">
+                        <md-radio-button value="SI" class="md-primary">Si</md-radio-button>
+                        <md-radio-button value="Vendido"> Vendido </md-radio-button>
+                    </md-radio-group>
+                </div>
+                <div ng-init="dtl.Select('no','locales','nombre', 'ASC', '100')">Locales
+                    <select ng-model="dtl.local" style="min-width: 200px;" ng-change="dtl.Select({'pago':quecosa,'local':dtl.local},'zapato','id', 'ASC','9999');">
+                        <option ng-value="m.nombre" ng-repeat="m in dtl.locales  track by $index" >{{m.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+            <br/>
             <table style="width:100%;">
                 <tr>
                     <th>PAGOS:{{quecosa}}</th>
