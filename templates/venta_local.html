@@ -50,9 +50,12 @@ table tr:nth-child(even) {
                                 <option ng-value="m.numero" ng-repeat="m in dtl.talles  track by $index" >{{m.numero}}</option>
                             </select>
                         </div>
+                        <div>
+                            <md-button ng-click="id=dtl.filtro=modelos=colores=talles=''" style="margin-top:-2%;">RESET</md-button>
+                        </div>
                         
                         <div>
-                            <img src="img/icon/baseline-archive-24px.png" alt="bajar a excel" style="width: 30px; height: auto; cursor: pointer;"  ng-click="dtl.Excel({'local':d.nombre,'pago':dtl.filtro},'zapato','id','ASC','9999');"/>
+                            <img src="img/icon/baseline-archive-24px.png" alt="bajar a excel" style="width: 30px; height: auto; cursor: pointer;"  ng-click="dtl.Excel({'local':dtl.localogin,'pago':dtl.filtro},'zapato','id','ASC','9999');"/>
                         </div>    
                             
                     </div>
